@@ -14,19 +14,11 @@ class Main extends Component {
 
     componentDidMount() {
         const {
-            actions: {
-                enterDashBoard,
-            },
             history,
             isAuthenticated,
         } = this.props;
-        enterDashBoard();
         if (!isAuthenticated)
             history.push('/login');
-    }
-
-    componentWillUnmount() {
-        this.props.actions.leaveDashBoard();
     }
 
     componentWillReceiveProps(nextProps) {

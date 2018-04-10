@@ -26,6 +26,12 @@ class AddAdmin extends PureComponent<Props, State> {
         this.props.actions.leaveAddAdmin();
     }
 
+    componentWillReceiveProps(nextProps) {
+        const { history } = this.props;
+        if (nextProps.isAdminAdded)
+            history.push('/dashboard/admins');
+    }
+
     renderField = ({input, label, id, type, fieldValue, meta: {touched, error, warning}}) => {
         return (
             <div className="form-group">

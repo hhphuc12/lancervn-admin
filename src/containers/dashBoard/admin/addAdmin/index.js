@@ -18,6 +18,7 @@ const mapStateToProps = (state) => {
         isError:         state.userAuth.isError,
         errorMessage:    state.userAuth.errorMessage,
         isFetching:      state.userAuth.isFetching,
+        isAdminAdded:    state.admin.isAdminAdded,
     };
 };
 

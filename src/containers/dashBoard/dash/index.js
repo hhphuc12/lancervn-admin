@@ -25,17 +25,16 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(
-        {
-            // containers:
-            ...viewsActions,
-            // userAuth:
-            ...userAuthActions,
-            // error:
-            ...errorActions
-        },
-        dispatch
-    );
+    return {
+        actions : bindActionCreators(
+            {
+                ...viewsActions,
+                ...userAuthActions,
+                ...errorActions,
+            },
+            dispatch
+        )
+    };
 };
 
 export default connect(

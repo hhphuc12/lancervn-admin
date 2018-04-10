@@ -15,7 +15,7 @@ import {
     LEAVE_PAGE_BAD_REQUEST_VIEW,
 } from "../constants/viewTypes";
 
-export function enterDashBoard(time: string = moment().format()) {
+export function enterDashboard(time: string = moment().format()) {
     return {
         type:         ENTER_DASHBOARD_VIEW,
         currentView:  'DashBoard',
@@ -24,7 +24,7 @@ export function enterDashBoard(time: string = moment().format()) {
     };
 }
 
-export function leaveDashBoard(time: string = moment().format()) {
+export function leaveDashboard(time: string = moment().format()) {
     return {
         type:         LEAVE_DASHBOARD_VIEW,
         currentView:  'DashBoard',

@@ -121,7 +121,7 @@ function addAdmin(admin) {
         dispatch(requestAddAdmin());
         postAdmin(admin)
             .then(res => {
-                if (res.status !== 200)
+                if (res.status !== 201)
                     return dispatch(errorBadRequest(res.status));
                 dispatch(receiveAddAdmin(res.data.docs));
             })
