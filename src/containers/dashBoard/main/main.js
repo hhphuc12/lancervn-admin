@@ -14,19 +14,11 @@ class Main extends Component {
 
     componentDidMount() {
         const {
-            actions: {
-                enterDashBoard,
-            },
             history,
             isAuthenticated,
         } = this.props;
-        enterDashBoard();
         if (!isAuthenticated)
             history.push('/login');
-    }
-
-    componentWillUnmount() {
-        this.props.actions.leaveDashBoard();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -218,72 +210,45 @@ class Main extends Component {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="pages/widgets.html">
-                                    <img className="menu-icon" src="/images/menu_icons/02.png" alt="menu icon"/>
-                                    <span className="menu-title">Widgets</span>
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="pages/ui-features/buttons.html">
-                                    <img className="menu-icon" src="/images/menu_icons/03.png" alt="menu icon"/>
-                                    <span className="menu-title">Buttons</span>
+                                <a className="nav-link" href="/dashboard/admins">
+                                    <img className="menu-icon" src="/images/menu_icons/08.png" alt="menu icon"/>
+                                    <span className="menu-title">Admin</span>
                                 </a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="pages/forms/basic_elements.html">
                                     <img className="menu-icon" src="/images/menu_icons/04.png" alt="menu icon"/>
-                                    <span className="menu-title">Form</span>
+                                    <span className="menu-title">Công việc</span>
                                 </a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="pages/charts/chartjs.html">
                                     <img className="menu-icon" src="/images/menu_icons/05.png" alt="menu icon"/>
-                                    <span className="menu-title">Charts</span>
+                                    <span className="menu-title">Gói công việc</span>
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="pages/ui-features/buttons.html">
+                                    <img className="menu-icon" src="/images/menu_icons/03.png" alt="menu icon"/>
+                                    <span className="menu-title">Loại công việc</span>
                                 </a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="pages/tables/basic-table.html">
                                     <img className="menu-icon" src="/images/menu_icons/06.png" alt="menu icon"/>
-                                    <span className="menu-title">Table</span>
+                                    <span className="menu-title">Kỹ năng</span>
                                 </a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="pages/icons/font-awesome.html">
                                     <img className="menu-icon" src="/images/menu_icons/07.png" alt="menu icon"/>
-                                    <span className="menu-title">Icons</span>
+                                    <span className="menu-title">Người dùng</span>
                                 </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" data-toggle="collapse" href="#general-pages"
-                                   aria-expanded="false" aria-controls="general-pages">
-                                    <img className="menu-icon" src="/images/menu_icons/08.png" alt="menu icon"/>
-                                    <span className="menu-title">General Pages</span>
-                                    <i className="menu-arrow"/>
-                                </a>
-                                <div className="collapse" id="general-pages">
-                                    <ul className="nav flex-column sub-menu">
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="pages/samples/blank-page.html">Blank Page</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="pages/samples/login.html">Login</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="pages/samples/register.html">Register</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="pages/samples/error-404.html">404</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="nav-link" href="pages/samples/error-500.html">500</a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="pages/ui-features/typography.html">
                                     <img className="menu-icon" src="/images/menu_icons/09.png" alt="menu icon"/>
-                                    <span className="menu-title">Typography</span>
+                                    <span className="menu-title">Thống kê</span>
                                 </a>
                             </li>
                         </ul>

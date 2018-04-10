@@ -2,8 +2,10 @@
 import moment from 'moment';
 import {
     ENTER_LOGIN_VIEW,
-    ENTER_REGISTER_VIEW,
-    LEAVE_REGISTER_VIEW,
+    ENTER_LIST_ADMIN_VIEW,
+    LEAVE_LIST_ADMIN_VIEW,
+    ENTER_ADD_ADMIN_VIEW,
+    LEAVE_ADD_ADMIN_VIEW,
     ENTER_DASHBOARD_VIEW,
     LEAVE_DASHBOARD_VIEW,
     ENTER_PAGE_NOT_FOUND_VIEW,
@@ -13,7 +15,7 @@ import {
     LEAVE_PAGE_BAD_REQUEST_VIEW,
 } from "../constants/viewTypes";
 
-export function enterDashBoard(time: string = moment().format()) {
+export function enterDashboard(time: string = moment().format()) {
     return {
         type:         ENTER_DASHBOARD_VIEW,
         currentView:  'DashBoard',
@@ -22,7 +24,7 @@ export function enterDashBoard(time: string = moment().format()) {
     };
 }
 
-export function leaveDashBoard(time: string = moment().format()) {
+export function leaveDashboard(time: string = moment().format()) {
     return {
         type:         LEAVE_DASHBOARD_VIEW,
         currentView:  'DashBoard',
@@ -67,22 +69,40 @@ export function leaveLogin(time: string = moment().format()) {
     };
 }
 
-export function enterRegister(time: string = moment().format()) {
-  return {
-    type:         ENTER_REGISTER_VIEW,
-    currentView:  'Register',
-    enterTime:    time,
-    leaveTime:    null
-  };
+export function enterListAdmin(time: string = moment().format()) {
+    return {
+        type:         ENTER_LIST_ADMIN_VIEW,
+        currentView:  'ListAdmin',
+        enterTime:    time,
+        leaveTime:    null
+    };
 }
 
-export function leaveRegister(time: string = moment().format()) {
-  return {
-    type:         LEAVE_REGISTER_VIEW,
-    currentView:  'Register',
-    enterTime:    null,
-    leaveTime:    time
-  };
+export function leaveListAdmin(time: string = moment().format()) {
+    return {
+        type:         LEAVE_LIST_ADMIN_VIEW,
+        currentView:  'ListAdmin',
+        enterTime:    null,
+        leaveTime:    time
+    };
+}
+
+export function enterAddAdmin(time: string = moment().format()) {
+    return {
+        type:         ENTER_ADD_ADMIN_VIEW,
+        currentView:  'AddAdmin',
+        enterTime:    time,
+        leaveTime:    null
+    };
+}
+
+export function leaveAddAdmin(time: string = moment().format()) {
+    return {
+        type:         LEAVE_ADD_ADMIN_VIEW,
+        currentView:  'AddAdmin',
+        enterTime:    null,
+        leaveTime:    time
+    };
 }
 
 export function enterPageBadRequest(time: string = moment().format()) {
