@@ -22,7 +22,7 @@ class ListAdmin extends PureComponent<Props, State> {
     render() {
         const { admins } = this.props;
         const adminsJSX = admins.map((admin, index) => (
-            <tr>
+            <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{admin.username}</td>
                 <td>{dateFormatter(admin.createdAt)}</td>
