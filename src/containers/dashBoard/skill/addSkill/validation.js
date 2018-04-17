@@ -3,7 +3,7 @@ export const validate = values => {
     const errors = {};
 
     if (!values.name) {
-        errors.name = 'Tên lĩnh vực là bắt buộc';
+        errors.name = 'Tên kỹ năng là bắt buộc';
     }
 
     return errors;
