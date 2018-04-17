@@ -5,7 +5,7 @@ import React, { PureComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { validate } from './validation';
 
-class AddAdmin extends PureComponent<Props, State> {
+class AddCategory extends PureComponent<Props, State> {
     constructor(props) {
         super(props);
         this.renderField = this.renderField.bind(this);
@@ -16,24 +16,23 @@ class AddAdmin extends PureComponent<Props, State> {
     };
 
     state = {
-        username: '',
-        password: '',
-        confirmPassword: '',
+        name: '',
+        description: '',
         isOK: true
     };
 
     componentDidMount() {
-        this.props.actions.enterAddAdmin();
+        this.props.actions.enterAddCategory();
     }
 
     componentWillUnmount() {
-        this.props.actions.leaveAddAdmin();
+        this.props.actions.leaveAddCategory();
     }
 
     componentWillReceiveProps(nextProps) {
         const {history} = this.props;
-        if (nextProps.isAdminAdded)
-            history.push('/dashboard/admins');
+        if (nextProps.isCategoryAdded)
+            history.push('/dashboard/categories');
         if (nextProps.syncValidation && !nextProps.syncValidation.syncErrors) {
             this.setState({ isOK: false });
         } else {
@@ -65,10 +64,14 @@ class AddAdmin extends PureComponent<Props, State> {
         if (event) {
             event.preventDefault();
         }
-        const { addAdminIfNeed, errorBadRequest } = this.props.actions;
-        const { username, password } = this.state;
+        const { addCategoryIfNeed, errorBadRequest } = this.props.actions;
+        const { name, description } = this.state;
         try {
-            addAdminIfNeed({ username, password });
+            addCategoryIfNeed({
+                name,
+                description,
+                isParent: true,
+            });
         } catch (error) {
             errorBadRequest();
             /* eslint-disable no-console */
@@ -78,7 +81,7 @@ class AddAdmin extends PureComponent<Props, State> {
     };
 
     render() {
-        const { username, password, confirmPassword, isOK } = this.state;
+        const { name, description, isOK } = this.state;
         const { isFetching, isError, errorMessage } = this.props;
         return (
             <div className="content-wrapper">
@@ -86,34 +89,26 @@ class AddAdmin extends PureComponent<Props, State> {
                     <div className="col-12 grid-margin">
                         <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title">Thêm admin</h4>
+                                <h4 className="card-title">Thêm lĩnh vực</h4>
                                 {
                                     isError ? <label className="text-danger">{`* ${errorMessage}`}</label> : null
                                 }
                                 <form className="forms-sample">
                                     <Field
-                                        id="username"
+                                        id="name"
                                         type="text"
-                                        name="username"
-                                        label="Tên đăng nhập"
+                                        name="name"
+                                        label="Tên loại công việc"
                                         component={this.renderField}
-                                        fieldValue={username}
+                                        fieldValue={name}
                                     />
                                     <Field
-                                        id="password"
-                                        type="password"
-                                        name="password"
-                                        label="Mật khẩu"
+                                        id="description"
+                                        type="text"
+                                        name="description"
+                                        label="Mô tả (không bắt buộc)"
                                         component={this.renderField}
-                                        fieldValue={password}
-                                    />
-                                    <Field
-                                        id="confirm-password"
-                                        type="password"
-                                        name="confirmPassword"
-                                        label="Nhập lại mật khẩu"
-                                        component={this.renderField}
-                                        fieldValue={confirmPassword}
+                                        fieldValue={description}
                                     />
                                     <button
                                         className="btn btn-success mr-2"
@@ -128,7 +123,7 @@ class AddAdmin extends PureComponent<Props, State> {
                                                 </span>
                                                 :
                                                 <span>
-                                                    Thêm
+                                                    Tạo
                                                 </span>
                                         }
                                     </button>
@@ -146,4 +141,4 @@ class AddAdmin extends PureComponent<Props, State> {
 export default reduxForm({
     form: 'syncValidation',
     validate,
-})(AddAdmin);
+})(AddCategory);

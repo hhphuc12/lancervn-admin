@@ -1,10 +1,9 @@
 // @flow strong
 
 // #region imports
-import React, {PureComponent} from 'react';
-import {Link} from 'react-router-dom';
-import {Field, reduxForm} from 'redux-form';
-import {validate} from './validation';
+import React, { PureComponent } from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { validate } from './validation';
 
 class Login extends PureComponent<Props, State> {
     constructor(props) {
@@ -34,11 +33,13 @@ class Login extends PureComponent<Props, State> {
         const {history} = this.props;
         if (nextProps.isAuthenticated)
             history.push('/dashboard');
+        console.log('hehe', nextProps.syncValidation);
         if (nextProps.syncValidation && !nextProps.syncValidation.syncErrors) {
             this.setState({ isOK: false });
         } else {
             this.setState({ isOK: true });
         }
+        console.log('ok', this.state.isOK);
     }
 
     renderField = ({input, label, id, type, fieldValue, icon, meta: {touched, error, warning}}) => {

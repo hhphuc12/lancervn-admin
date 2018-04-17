@@ -1,5 +1,6 @@
 // @flow weak
 import { listAdmin, postAdmin } from "./admin";
+import { listCategory, postAddCategory, detailCategory } from "./category";
 
 import request                         from '../promisedHttpRequest';
 
@@ -13,4 +14,7 @@ export const postLogin = (username, password) => {
 export {
     listAdmin,
     postAdmin,
+    listCategory,
+    postAddCategory,
+    detailCategory,
 };

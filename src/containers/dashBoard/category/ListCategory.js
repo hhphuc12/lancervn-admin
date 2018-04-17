@@ -1,33 +1,38 @@
 // @flow strong
 
 import React, {PureComponent} from 'react';
-import { dateFormatter } from "../../../../helpers";
+import { dateFormatter, truncateText } from "../../../helpers";
+import { Link } from 'react-router-dom';
 
 class ListAdmin extends PureComponent<Props, State> {
     componentDidMount() {
         const {
             actions: {
-                getAdminsIfNeed,
-                enterListAdmin,
+                getCategoriesIfNeed,
+                enterListCategory,
             }
         } = this.props;
-        enterListAdmin();
-        getAdminsIfNeed();
+        enterListCategory();
+        getCategoriesIfNeed();
     }
 
     componentWillUnmount() {
-        this.props.actions.leaveListAdmin();
+        this.props.actions.leaveListCategory();
     }
 
     render() {
-        const { admins } = this.props;
-        const adminsJSX = admins.map((admin, index) => (
+        const { categories } = this.props;
+        const categoriesJSX = categories.map((cate, index) => (
             <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{admin.username}</td>
-                <td>{dateFormatter(admin.createdAt)}</td>
-                <td>{dateFormatter(admin.updatedAt)}</td>
-                <td><label className="badge badge-teal">Active</label></td>
+                <td className="table-cell-content">{index + 1}</td>
+                <td className="table-cell-content">{cate.name}</td>
+                <td className="table-cell-content">{truncateText(cate.description, 30)}</td>
+                <td className="table-cell-content">{dateFormatter(cate.updatedAt)}</td>
+                <td className="text-right">
+                    <Link to={`/dashboard/category/${cate._id}`} className="btn btn-outline-success btn-sm">
+                        Chi tiết
+                    </Link>
+                </td>
             </tr>
         ));
 
@@ -38,11 +43,11 @@ class ListAdmin extends PureComponent<Props, State> {
                         <div className="card">
                             <div className="card-body">
                                 <div className="card-list-header">
-                                    <h5 className="card-title mb-4" style={{ padding: 7 }}>Admins</h5>
+                                    <h5 className="card-title mb-4" style={{ padding: 7 }}>Lĩnh vực</h5>
                                     <div>
-                                        <a href="/dashboard/add-admin" className="btn btn-primary">
+                                        <a href="/dashboard/add-category" className="btn btn-primary">
                                             <i className="fa fa-plus"/>
-                                            Thêm admin
+                                            Tạo lĩnh vực
                                         </a>
                                     </div>
                                 </div>
@@ -51,15 +56,15 @@ class ListAdmin extends PureComponent<Props, State> {
                                         <thead>
                                         <tr>
                                             <th className="border-bottom-0">No.</th>
-                                            <th className="border-bottom-0">Username</th>
-                                            <th className="border-bottom-0">Create at</th>
+                                            <th className="border-bottom-0">Name</th>
+                                            <th className="border-bottom-0">Description</th>
                                             <th className="border-bottom-0">Updated at</th>
-                                            <th className="border-bottom-0">Status</th>
+                                            <th className="border-bottom-0 text-right">Actions</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         {
-                                            adminsJSX
+                                            categoriesJSX
                                         }
                                         </tbody>
                                     </table>

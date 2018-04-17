@@ -1,14 +1,20 @@
 // @flow weak
 
-import request from '../promisedHttpRequest';
+import request                         from '../promisedHttpRequest';
 
-let BASE_URL_TOKUBUY = process.env.REACT_APP_ROOT_API_TOKUBUY;
+let API_URI = process.env.REACT_APP_API_URI;
 
-if (process.env.REACT_APP_ENV === 'staging') {
-    BASE_URL_TOKUBUY = process.env.REACT_APP_ROOT_API_STG_TOKUBUY;
-}
+export const listCategory = () => {
+    const url = `${API_URI}admin/list-category`;
+    return request.get(url);
+};
 
-export function fetchListCategories() {
-    const url = `${BASE_URL_TOKUBUY}categories`;
+export const postAddCategory = category => {
+    const url = `${API_URI}admin/create-category`;
+    return request.post(url, { category });
+};
+
+export const detailCategory = id => {
+    const url = `${API_URI}admin/category?id=${id}`;
     return request.get(url);
 };
