@@ -8,6 +8,12 @@ import {
     LEAVE_ADD_ADMIN_VIEW,
     ENTER_DASHBOARD_VIEW,
     LEAVE_DASHBOARD_VIEW,
+    ENTER_LIST_CATEGORY_VIEW,
+    LEAVE_LIST_CATEGORY_VIEW,
+    ENTER_ADD_CATEGORY_VIEW,
+    LEAVE_ADD_CATEGORY_VIEW,
+    ENTER_DETAIL_CATEGORY_VIEW,
+    LEAVE_DETAIL_CATEGORY_VIEW,
     ENTER_PAGE_NOT_FOUND_VIEW,
     LEAVE_LOGIN_VIEW,
     LEAVE_PAGE_NOT_FOUND_VIEW,
@@ -100,6 +106,60 @@ export function leaveAddAdmin(time: string = moment().format()) {
     return {
         type:         LEAVE_ADD_ADMIN_VIEW,
         currentView:  'AddAdmin',
+        enterTime:    null,
+        leaveTime:    time
+    };
+}
+
+export function enterListCategory(time: string = moment().format()) {
+    return {
+        type:         ENTER_LIST_CATEGORY_VIEW,
+        currentView:  'ListCategory',
+        enterTime:    time,
+        leaveTime:    null
+    };
+}
+
+export function leaveListCategory(time: string = moment().format()) {
+    return {
+        type:         LEAVE_LIST_CATEGORY_VIEW,
+        currentView:  'ListCategory',
+        enterTime:    null,
+        leaveTime:    time
+    };
+}
+
+export function enterAddCategory(time: string = moment().format()) {
+    return {
+        type:         ENTER_ADD_CATEGORY_VIEW,
+        currentView:  'AddCategory',
+        enterTime:    time,
+        leaveTime:    null
+    };
+}
+
+export function leaveAddCategory(time: string = moment().format()) {
+    return {
+        type:         LEAVE_ADD_CATEGORY_VIEW,
+        currentView:  'AddCategory',
+        enterTime:    null,
+        leaveTime:    time
+    };
+}
+
+export function enterDetailCategory(time: string = moment().format()) {
+    return {
+        type:         ENTER_DETAIL_CATEGORY_VIEW,
+        currentView:  'DetailCategory',
+        enterTime:    time,
+        leaveTime:    null
+    };
+}
+
+export function leaveDetailCategory(time: string = moment().format()) {
+    return {
+        type:         LEAVE_DETAIL_CATEGORY_VIEW,
+        currentView:  'DetailCategory',
         enterTime:    null,
         leaveTime:    time
     };

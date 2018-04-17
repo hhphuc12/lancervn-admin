@@ -79,17 +79,18 @@ function requestAddAdmin(time = moment().format()) {
         time
     };
 }
-function receiveAddAdmin(time = moment().format()) {
+function receivedAddAdmin(time = moment().format()) {
     return {
         type:       RECEIVED_ADD_ADMIN,
         isFetching: false,
         time
     };
 }
-function errorAddAdmin(time = moment().format()) {
+function errorAddAdmin(msg, time = moment().format()) {
     return {
         type:       ERROR_ADD_ADMIN,
         isFetching: false,
+        msg,
         time
     };
 }
@@ -122,11 +123,11 @@ function addAdmin(admin) {
         postAdmin(admin)
             .then(res => {
                 if (res.status !== 201)
-                    return dispatch(errorBadRequest(res.status));
-                dispatch(receiveAddAdmin(res.data.docs));
+                    throw res;
+                dispatch(receivedAddAdmin());
             })
-            .catch(error => {
-                dispatch(errorAddAdmin(error));
+            .catch(res => {
+                dispatch(errorAddAdmin(res.error.message));
                 dispatch(errorBadRequest(400));
             });
     };

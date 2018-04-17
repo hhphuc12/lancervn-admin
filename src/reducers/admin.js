@@ -13,6 +13,8 @@ const initialState = {
     admins: [],
     isFetching: false,
     isAdminAdded: false,
+    isError: false,
+    errorMessage: '',
 };
 
 const currentTime = moment().format();
@@ -41,7 +43,7 @@ export default function (
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
-                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
+                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
             };
 
         case REQUEST_ADD_ADMIN:
@@ -57,6 +59,8 @@ export default function (
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
                 isAdminAdded: true,
+                isError: false,
+                errorMessage: '',
             };
 
         case ERROR_ADD_ADMIN:
@@ -65,6 +69,8 @@ export default function (
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
                 isAdminAdded: false,
+                isError: true,
+                errorMessage: action && action.msg,
             };
 
         default:

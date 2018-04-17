@@ -228,9 +228,9 @@ class Main extends Component {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="pages/ui-features/buttons.html">
+                                <a className="nav-link" href="/dashboard/categories">
                                     <img className="menu-icon" src="/images/menu_icons/03.png" alt="menu icon"/>
-                                    <span className="menu-title">Loại công việc</span>
+                                    <span className="menu-title">Lĩnh vực</span>
                                 </a>
                             </li>
                             <li className="nav-item">

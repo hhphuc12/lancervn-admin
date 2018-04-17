@@ -4,19 +4,21 @@ import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 import * as viewsActions      from '../../../../actions/viewAction';
 import * as userAuthActions   from '../../../../actions/userAuthAction';
-import * as adminActions      from '../../../../actions/adminActions';
-import AddAdmin               from './AddAdmin';
-import * as errorActions      from "../../../../actions/errorActions";
+import * as categoryActions   from '../../../../actions/categoryActions';
+import Detail                 from './Detail';
+import * as errorActions      from '../../../../actions/errorActions';
 
 const mapStateToProps = (state) => {
     return {
         // containers:
-        currentView:  state.views.currentView,
+        currentView:     state.views.currentView,
 
-        isError:         state.admin.isError,
-        errorMessage:    state.admin.errorMessage,
-        isFetching:      state.admin.isFetching,
-        isAdminAdded:    state.admin.isAdminAdded,
+        isError:         state.category.isError,
+        errorMessage:    state.category.errorMessage,
+        isFetching:      state.category.isFetching,
+
+        name:            state.category.name,
+        listChild:       state.category.listChild,
 
         syncValidation:  state.form.syncValidation,
     };
@@ -28,7 +30,7 @@ const mapDispatchToProps = (dispatch) => {
             {
                 ...viewsActions,
                 ...userAuthActions,
-                ...adminActions,
+                ...categoryActions,
                 ...errorActions,
             },
             dispatch
@@ -39,4 +41,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AddAdmin);
+)(Detail);

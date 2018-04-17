@@ -5,12 +5,14 @@ import { reducer as reduxFormReducer }   from 'redux-form';
 import views                             from './views';
 import userAuth                          from './userAuth';
 import admin                             from './admin';
+import category                          from './category';
 import error                             from './error';
 
 export const reducers = {
     views,
     userAuth,
     admin,
+    category,
     error,
 };
 
