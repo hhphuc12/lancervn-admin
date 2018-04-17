@@ -229,13 +229,13 @@ class Main extends Component {
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/dashboard/categories">
-                                    <img className="menu-icon" src="/images/menu_icons/03.png" alt="menu icon"/>
+                                    <img className="menu-icon" src="/images/menu_icons/06.png" alt="menu icon"/>
                                     <span className="menu-title">Lĩnh vực</span>
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="pages/tables/basic-table.html">
-                                    <img className="menu-icon" src="/images/menu_icons/06.png" alt="menu icon"/>
+                                <a className="nav-link" href="/dashboard/skills">
+                                    <img className="menu-icon" src="/images/menu_icons/03.png" alt="menu icon"/>
                                     <span className="menu-title">Kỹ năng</span>
                                 </a>
                             </li>

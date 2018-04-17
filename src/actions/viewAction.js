@@ -19,6 +19,10 @@ import {
     LEAVE_PAGE_NOT_FOUND_VIEW,
     ENTER_PAGE_BAD_REQUEST_VIEW,
     LEAVE_PAGE_BAD_REQUEST_VIEW,
+    ENTER_LIST_SKILL_VIEW,
+    LEAVE_LIST_SKILL_VIEW,
+    ENTER_ADD_SKILL_VIEW,
+    LEAVE_ADD_SKILL_VIEW,
 } from "../constants/viewTypes";
 
 export function enterDashboard(time: string = moment().format()) {
@@ -78,7 +82,7 @@ export function leaveLogin(time: string = moment().format()) {
 export function enterListAdmin(time: string = moment().format()) {
     return {
         type:         ENTER_LIST_ADMIN_VIEW,
-        currentView:  'ListAdmin',
+        currentView:  'ListSkill',
         enterTime:    time,
         leaveTime:    null
     };
@@ -87,7 +91,7 @@ export function enterListAdmin(time: string = moment().format()) {
 export function leaveListAdmin(time: string = moment().format()) {
     return {
         type:         LEAVE_LIST_ADMIN_VIEW,
-        currentView:  'ListAdmin',
+        currentView:  'ListSkill',
         enterTime:    null,
         leaveTime:    time
     };
@@ -160,6 +164,42 @@ export function leaveDetailCategory(time: string = moment().format()) {
     return {
         type:         LEAVE_DETAIL_CATEGORY_VIEW,
         currentView:  'DetailCategory',
+        enterTime:    null,
+        leaveTime:    time
+    };
+}
+
+export function enterListSkill(time: string = moment().format()) {
+    return {
+        type:         ENTER_LIST_SKILL_VIEW,
+        currentView:  'ListSkill',
+        enterTime:    time,
+        leaveTime:    null
+    };
+}
+
+export function leaveListSkill(time: string = moment().format()) {
+    return {
+        type:         LEAVE_LIST_SKILL_VIEW,
+        currentView:  'ListSkill',
+        enterTime:    null,
+        leaveTime:    time
+    };
+}
+
+export function enterAddSkill(time: string = moment().format()) {
+    return {
+        type:         ENTER_ADD_SKILL_VIEW,
+        currentView:  'AddSkill',
+        enterTime:    time,
+        leaveTime:    null
+    };
+}
+
+export function leaveAddSkill(time: string = moment().format()) {
+    return {
+        type:         LEAVE_ADD_SKILL_VIEW,
+        currentView:  'AddSkill',
         enterTime:    null,
         leaveTime:    time
     };

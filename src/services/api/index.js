@@ -1,6 +1,7 @@
 // @flow weak
 import { listAdmin, postAdmin } from "./admin";
 import { listCategory, postAddCategory, detailCategory } from "./category";
+import { listSkill, postSkill } from "./skill";
 
 import request                         from '../promisedHttpRequest';
 
@@ -17,4 +18,6 @@ export {
     listCategory,
     postAddCategory,
     detailCategory,
+    listSkill,
+    postSkill,
 };
