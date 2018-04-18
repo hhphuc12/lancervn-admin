@@ -7,6 +7,7 @@ import userAuth                          from './userAuth';
 import admin                             from './admin';
 import category                          from './category';
 import skill                             from './skill';
+import user                              from './user';
 import error                             from './error';
 
 export const reducers = {
@@ -15,6 +16,7 @@ export const reducers = {
     admin,
     category,
     skill,
+    user,
     error,
 };
 

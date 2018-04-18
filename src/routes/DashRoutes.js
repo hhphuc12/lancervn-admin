@@ -13,6 +13,7 @@ import AddCategory              from '../containers/dashBoard/category/addCatego
 import DetailCategory           from '../containers/dashBoard/category/categoryDetail';
 import ListSkill                from '../containers/dashBoard/skill/listSkill';
 import AddSkill                 from '../containers/dashBoard/skill/addSkill';
+import ListUser                 from '../containers/dashBoard/user/listUser';
 import PageNotFound             from '../containers/pageNotFound';
 
 const DashRoutes = () => (
@@ -25,6 +26,7 @@ const DashRoutes = () => (
         <Route path='/dashboard/category/:id' component={DetailCategory} />
         <Route path='/dashboard/skills' component={ListSkill} />
         <Route path='/dashboard/add-skill' component={AddSkill} />
+        <Route path='/dashboard/users' component={ListUser} />
         <Route component={PageNotFound} />
     </Switch>
 );
