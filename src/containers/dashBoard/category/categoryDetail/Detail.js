@@ -2,7 +2,7 @@
 
 import React, {PureComponent} from 'react';
 import { dateFormatter, truncateText } from "../../../../helpers";
-import { Link } from 'react-router-dom';
+import $ from 'jquery';
 import { Field, reduxForm } from 'redux-form';
 import { validate } from './validation';
 
@@ -41,8 +41,11 @@ class Detail extends PureComponent<Props, State> {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.isCategoryAdded)
+        if (nextProps.isCategoryAdded){
             this.fetchListChild(this.state.parentId);
+            $('#close-modal-btn').click();
+            this.props.actions.resetAddState();
+        }
         if (nextProps.syncValidation && !nextProps.syncValidation.syncErrors) {
             this.setState({ isOK: false });
         } else {
@@ -60,7 +63,7 @@ class Detail extends PureComponent<Props, State> {
                     className={'form-control'}
                     id={id}
                     value={fieldValue}
-                    onChange={e => this.setState({[input.name]: e.target.value.trim()})}
+                    onChange={e => this.setState({[input.name]: e.target.value})}
                 />
                 {touched && ((error && <label className="text-danger" style={{ marginTop: 5 }}>{`* ${error}`}</label>) ||
                     (warning && <label className="text-danger" style={{ marginTop: 5 }}>{`* ${warning}`}</label>))}
@@ -78,8 +81,8 @@ class Detail extends PureComponent<Props, State> {
         const { nameAdd, descriptionAdd } = this.state;
         try {
             addCategoryIfNeed({
-                name: nameAdd,
-                description: descriptionAdd,
+                name: nameAdd.trim(),
+                description: descriptionAdd.trim(),
                 parentId: this.props.match.params.id,
                 isParent: false,
             });
@@ -101,9 +104,9 @@ class Detail extends PureComponent<Props, State> {
                 <td className="table-cell-content">{truncateText(cate.description, 30)}</td>
                 <td className="table-cell-content">{dateFormatter(cate.updatedAt)}</td>
                 <td className="text-right">
-                    <Link to={`/dashboard/category/${cate._id}`} className="btn btn-outline-success btn-sm">
-                        Chi tiết
-                    </Link>
+                    <a href="#" className="btn btn-outline-danger btn-sm">
+                        Xóa
+                    </a>
                 </td>
             </tr>
         ));
@@ -118,11 +121,11 @@ class Detail extends PureComponent<Props, State> {
                                     <h5 className="card-title mb-4" style={{ padding: 7 }}>{`Lĩnh vực con (${name})`}</h5>
                                     <div>
                                         <a
-                                            data-toggle="modal"
-                                            href="#addSubCategory"
+                                            data-target="#addSubCategory"
+                                            href="#"
                                             className="btn btn-primary"
-                                            data-backdrop="static"
-                                            data-keyboard="false"
+                                            data-toggle="modal"
+                                            id="create-subcate-btn"
                                         >
                                             <i className="fa fa-plus"/>
                                             Tạo lĩnh vực con
@@ -156,7 +159,7 @@ class Detail extends PureComponent<Props, State> {
                                                 </div>
                                                 <div className="modal-footer">
                                                     <div className="button-area-2">
-                                                        <button className="btn btn-light" data-dismiss="modal">Hủy bỏ</button>
+                                                        <button id="close-modal-btn" className="btn btn-light" data-dismiss="modal">Hủy bỏ</button>
                                                         <button
                                                             className="btn btn-success mr-2"
                                                             type="button"
