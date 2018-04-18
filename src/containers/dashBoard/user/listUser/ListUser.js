@@ -23,11 +23,11 @@ class ListUser extends PureComponent<Props, State> {
         const { users } = this.props;
         const usersJSX = users.map((user, index) => (
             <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.occupation}</td>
-                <td>{dateFormatter(user.createdAt)}</td>
+                <td className="table-cell-content">{index + 1}</td>
+                <td className="table-cell-content">{user.name}</td>
+                <td className="table-cell-content">{user.email}</td>
+                <td className="table-cell-content">{user.occupation}</td>
+                <td className="table-cell-content">{dateFormatter(user.createdAt)}</td>
                 <td className="text-right">
                     <a href="#" className="btn btn-outline-success btn-sm">
                         Chi tiết
