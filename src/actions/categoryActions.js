@@ -11,6 +11,7 @@ import {
     REQUEST_DETAIL_CATEGORY,
     RECEIVED_DETAIL_CATEGORY,
     ERROR_DETAIL_CATEGORY,
+    RESET_ADD_STATE,
 } from "../constants/categoryType";
 import { errorBadRequest } from './errorActions';
 
@@ -130,6 +131,7 @@ function addCategory(category) {
                 dispatch(receivedAddCategory());
             })
             .catch(res => {
+                console.log({ res });
                 dispatch(errorAddCategory(res.error.message));
                 dispatch(errorBadRequest(400));
             });
@@ -191,8 +193,17 @@ function getDetail(id) {
                 dispatch(receivedDetailCategory(res.data));
             })
             .catch(error => {
-                dispatch(errorListCategories(error));
+                dispatch(errorDetailCategory(error));
                 dispatch(errorBadRequest(400));
             });
     };
 };
+
+export function resetAddState(): (...any) => Promise<any> {
+    return (
+        dispatch: (any) => any,
+        getState: () => boolean,
+    ): any => {
+        return dispatch({ type: RESET_ADD_STATE });
+    }
+}

@@ -13,3 +13,4 @@ export const ERROR_ADD_CATEGORY:                   string = 'ERROR_ADD_CATEGORY'
 export const REQUEST_DETAIL_CATEGORY:              string = 'REQUEST_DETAIL_CATEGORY';
 export const RECEIVED_DETAIL_CATEGORY:             string = 'RECEIVED_DETAIL_CATEGORY';
 export const ERROR_DETAIL_CATEGORY:                string = 'ERROR_DETAIL_CATEGORY';
+export const RESET_ADD_STATE:                      string = 'RESET_ADD_STATE';

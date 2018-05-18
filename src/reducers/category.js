@@ -9,6 +9,7 @@ import {
     REQUEST_DETAIL_CATEGORY,
     RECEIVED_DETAIL_CATEGORY,
     ERROR_DETAIL_CATEGORY,
+    RESET_ADD_STATE,
 } from "../constants/categoryType";
 import moment from "moment/moment";
 
@@ -87,7 +88,6 @@ export default function (
 
         case RECEIVED_DETAIL_CATEGORY:
             const { name, listChild } = action && action.category;
-            console.log({ name: listChild });
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
@@ -105,6 +105,12 @@ export default function (
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
                 isError: true,
                 errorMessage: '',
+            };
+
+        case RESET_ADD_STATE:
+            return {
+                ...state,
+                isCategoryAdded: false,
             };
 
         default:
