@@ -4,13 +4,17 @@ import { combineReducers }               from 'redux';
 import { reducer as reduxFormReducer }   from 'redux-form';
 import views                             from './views';
 import userAuth                          from './userAuth';
-import campaign                          from './campaign';
+import admin                             from './admin';
+import category                          from './category';
+import skill                             from './skill';
 import error                             from './error';
 
 export const reducers = {
     views,
     userAuth,
-    campaign,
+    admin,
+    category,
+    skill,
     error,
 };
 

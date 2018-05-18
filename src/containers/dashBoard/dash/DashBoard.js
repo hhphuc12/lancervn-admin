@@ -3,6 +3,14 @@
 import React, {PureComponent} from 'react';
 
 class DashBoard extends PureComponent<Props, State> {
+    componentDidMount() {
+        this.props.actions.enterDashboard();
+    }
+
+    componentWillUnmount() {
+        this.props.actions.leaveDashboard();
+    }
+
     render() {
         return (
             <div className="content-wrapper">

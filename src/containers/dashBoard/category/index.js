@@ -4,8 +4,9 @@ import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 import * as viewsActions      from '../../../actions/viewAction';
 import * as userAuthActions   from '../../../actions/userAuthAction';
-import DashBoard              from './DashBoard';
-import * as errorActions      from "../../../actions/errorActions";
+import * as categoryActions   from '../../../actions/categoryActions';
+import ListCategory               from './ListCategory';
+import * as errorActions      from '../../../actions/errorActions';
 
 const mapStateToProps = (state) => {
     return {
@@ -17,10 +18,8 @@ const mapStateToProps = (state) => {
         isError:         state.userAuth.isError,
         errorMessage:    state.userAuth.errorMessage,
         isFetching:      state.userAuth.isFetching,
-        isLogging:       state.userAuth.isLogging,
 
-        // redux form
-        syncValidation: state.form.syncValidation
+        categories:      state.category.categories,
     };
 };
 
@@ -30,6 +29,7 @@ const mapDispatchToProps = (dispatch) => {
             {
                 ...viewsActions,
                 ...userAuthActions,
+                ...categoryActions,
                 ...errorActions,
             },
             dispatch
@@ -40,4 +40,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(DashBoard);
+)(ListCategory);

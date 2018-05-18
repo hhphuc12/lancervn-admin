@@ -64,7 +64,11 @@ export const dateTimeFormatter = (dateTime: string) => {
 
 export const dateFormatter = (date: string) => {
     if (date === null || date === undefined) return '---';
-    return date.substring(0, 10);
+    const d = new Date(date);
+    const day = d.getDate() < 10 ? `0${d.getDate()}` : d.getDate();
+    const month = d.getMonth() < 10 ? `0${d.getMonth()}` : d.getMonth();
+    const year = d.getFullYear();
+    return `${day}/${month}/${year}`;
 };
 
 export const changePreview = (image, placeToInsertImagePreview) => {

@@ -107,3 +107,12 @@ input[type="file"] {
   width: 200px;
   height: 200px;
 }
+
+.card-list-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-cell-content {
+  padding-top: 15px !important;
+}
