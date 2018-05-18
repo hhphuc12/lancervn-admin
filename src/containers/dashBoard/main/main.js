@@ -169,11 +169,11 @@ class Main extends Component {
                                     aria-labelledby="accountDropdown"
                                     style={{ marginTop: 8, borderRadius: 4 }}
                                 >
-                                    <a href="#" className="dropdown-item">
+                                    <a href="#" className="dropdown-item profile-dropdown-item">
                                         <img className="profile-dropdown-icon" src="/images/icons/profile.png" />
                                         <p className="mb-0 font-weight-normal float-left">Xem hồ sơ cá nhân</p>
                                     </a>
-                                    <div className="dropdown-divider"/>
+                                    <div className="dropdown-divider profile-dropdown-item"/>
                                     <a href="#" onClick={this.onLogout} className="dropdown-item">
                                         <img className="profile-dropdown-icon" src="/images/icons/log_out.png" alt=""/>
                                         <p className="mb-0 font-weight-normal float-left">Đăng xuất</p>
