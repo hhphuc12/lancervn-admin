@@ -23,6 +23,10 @@ import {
     LEAVE_LIST_SKILL_VIEW,
     ENTER_ADD_SKILL_VIEW,
     LEAVE_ADD_SKILL_VIEW,
+    ENTER_LIST_USER_VIEW,
+    LEAVE_LIST_USER_VIEW,
+    ENTER_DETAIL_USER_VIEW,
+    LEAVE_DETAIL_USER_VIEW,
 } from "../constants/viewTypes";
 
 export function enterDashboard(time: string = moment().format()) {
@@ -82,7 +86,7 @@ export function leaveLogin(time: string = moment().format()) {
 export function enterListAdmin(time: string = moment().format()) {
     return {
         type:         ENTER_LIST_ADMIN_VIEW,
-        currentView:  'ListSkill',
+        currentView:  'ListUser',
         enterTime:    time,
         leaveTime:    null
     };
@@ -91,7 +95,7 @@ export function enterListAdmin(time: string = moment().format()) {
 export function leaveListAdmin(time: string = moment().format()) {
     return {
         type:         LEAVE_LIST_ADMIN_VIEW,
-        currentView:  'ListSkill',
+        currentView:  'ListUser',
         enterTime:    null,
         leaveTime:    time
     };
@@ -172,7 +176,7 @@ export function leaveDetailCategory(time: string = moment().format()) {
 export function enterListSkill(time: string = moment().format()) {
     return {
         type:         ENTER_LIST_SKILL_VIEW,
-        currentView:  'ListSkill',
+        currentView:  'ListUser',
         enterTime:    time,
         leaveTime:    null
     };
@@ -181,7 +185,7 @@ export function enterListSkill(time: string = moment().format()) {
 export function leaveListSkill(time: string = moment().format()) {
     return {
         type:         LEAVE_LIST_SKILL_VIEW,
-        currentView:  'ListSkill',
+        currentView:  'ListUser',
         enterTime:    null,
         leaveTime:    time
     };
@@ -200,6 +204,42 @@ export function leaveAddSkill(time: string = moment().format()) {
     return {
         type:         LEAVE_ADD_SKILL_VIEW,
         currentView:  'AddSkill',
+        enterTime:    null,
+        leaveTime:    time
+    };
+}
+
+export function enterListUser(time: string = moment().format()) {
+    return {
+        type:         ENTER_LIST_USER_VIEW,
+        currentView:  'ListUser',
+        enterTime:    time,
+        leaveTime:    null
+    };
+}
+
+export function leaveListUser(time: string = moment().format()) {
+    return {
+        type:         LEAVE_LIST_USER_VIEW,
+        currentView:  'ListUser',
+        enterTime:    null,
+        leaveTime:    time
+    };
+}
+
+export function enterDetailUser(time: string = moment().format()) {
+    return {
+        type:         ENTER_DETAIL_USER_VIEW,
+        currentView:  'DetailUser',
+        enterTime:    time,
+        leaveTime:    null
+    };
+}
+
+export function leaveDetailUser(time: string = moment().format()) {
+    return {
+        type:         LEAVE_DETAIL_USER_VIEW,
+        currentView:  'DetailUser',
         enterTime:    null,
         leaveTime:    time
     };

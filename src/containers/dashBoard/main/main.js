@@ -240,7 +240,7 @@ class Main extends Component {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="pages/icons/font-awesome.html">
+                                <a className="nav-link" href="/dashboard/users">
                                     <img className="menu-icon" src="/images/menu_icons/07.png" alt="menu icon"/>
                                     <span className="menu-title">Người dùng</span>
                                 </a>
