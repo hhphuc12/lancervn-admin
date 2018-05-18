@@ -50,7 +50,7 @@
     "simple-line-icons": "2.4.1"
   },
   "scripts": {
-    "start": "PORT=3000 react-scripts start",
+    "start": "PORT=1995 react-scripts start",
     "build": "react-scripts build",
     "test": "mocha src/config/.setup.js src/**/*.test.js",
     "eject": "react-scripts eject",
