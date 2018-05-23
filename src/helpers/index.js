@@ -71,6 +71,12 @@ export const dateFormatter = (date: string) => {
     return `${day}/${month}/${year}`;
 };
 
+export const dateFormater = (date: string) => {
+    if (date === null || date === undefined) return '---';
+    const d = new Date(date);
+    return d.toLocaleString('vi', { year: 'numeric', month: 'numeric', day: 'numeric', });
+};
+
 export const str30Format = str => {
     if (!str.length) return '---';
     if (str.length < 30) return str;

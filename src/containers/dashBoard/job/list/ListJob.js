@@ -1,7 +1,7 @@
 // @flow strong
 
 import React, {PureComponent} from 'react';
-import { moneyFormater, str30Format } from "../../../helpers";
+import { moneyFormater, str30Format } from "../../../../helpers/index";
 
 class ListJob extends PureComponent<Props, State> {
     componentDidMount() {
@@ -36,7 +36,7 @@ class ListJob extends PureComponent<Props, State> {
                     }
                 </td>
                 <td className="text-right">
-                    <a href="#" className="btn btn-outline-success btn-sm">
+                    <a href={`/dashboard/job/${j._id}`} className="btn btn-outline-success btn-sm">
                         Xem chi tiết
                     </a>
                 </td>

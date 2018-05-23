@@ -120,3 +120,17 @@ input[type="file"] {
 .profile-dropdown-item {
   border-bottom: none !important;
 }
+
+.profile-box {
+  text-align: center;
+}
+
+.avatar-profile {
+  border-radius: 50% !important;
+  width: 12rem;
+  height: 12rem;
+}
+
+.profile-name {
+  margin-top: 2rem;
+}

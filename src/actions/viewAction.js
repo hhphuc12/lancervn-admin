@@ -8,6 +8,8 @@ import {
     LEAVE_ADD_ADMIN_VIEW,
     ENTER_LIST_JOB_VIEW,
     LEAVE_LIST_JOB_VIEW,
+    ENTER_JOB_DETAIL_VIEW,
+    LEAVE_JOB_DETAIL_VIEW,
     ENTER_DASHBOARD_VIEW,
     LEAVE_DASHBOARD_VIEW,
     ENTER_LIST_CATEGORY_VIEW,
@@ -134,6 +136,24 @@ export function leaveListJob(time: string = moment().format()) {
     return {
         type:         LEAVE_LIST_JOB_VIEW,
         currentView:  'ListJob',
+        enterTime:    null,
+        leaveTime:    time
+    };
+}
+
+export function enterJobDetail(time: string = moment().format()) {
+    return {
+        type:         ENTER_JOB_DETAIL_VIEW,
+        currentView:  'JobDetail',
+        enterTime:    time,
+        leaveTime:    null
+    };
+}
+
+export function leaveJobDetail(time: string = moment().format()) {
+    return {
+        type:         LEAVE_JOB_DETAIL_VIEW,
+        currentView:  'JobDetail',
         enterTime:    null,
         leaveTime:    time
     };

@@ -9,7 +9,12 @@ export const listJob = (page, token) => {
     return request.get(url, token);
 };
 
-// export const postAdmin = admin => {
-//     const url = `${API_URI}admin/add-admin`;
-//     return request.post(url, { admin });
-// };
+export const jobDetail = (id, token) => {
+    const url = `${API_URI}admin/job-detail?id=${id}`;
+    return request.get(url, token);
+};
+
+export const postBrowseJob = (id, token) => {
+    const url = `${API_URI}admin/browse-job`;
+    return request.post(url, { id }, token);
+};

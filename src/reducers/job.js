@@ -3,14 +3,19 @@ import {
     REQUEST_LIST_JOB,
     RECEIVED_LIST_JOB,
     ERROR_LIST_JOB,
-    REQUEST_BROWSER_JOB,
-    RECEIVED_BROWSER_JOB,
-    ERROR_BROWSER_JOB,
+    REQUEST_BROWSE_JOB,
+    RECEIVED_BROWSE_JOB,
+    ERROR_BROWSE_JOB,
+    REQUEST_JOB_DETAIL,
+    RECEIVED_JOB_DETAIL,
+    ERROR_JOB_DETAIL,
 } from "../constants/jobType";
 import moment from "moment/moment";
 
 const initialState = {
     jobs: [],
+    jobDetail: {},
+    isBrowseSuccess: false,
     isFetching: false,
     isError: false,
     errorMessage: '',
@@ -45,32 +50,50 @@ export default function (
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
             };
 
-        // case REQUEST_ADD_ADMIN:
-        //     return {
-        //         ...state,
-        //         actionTime: action && action.time ?  action && action.time : currentTime,
-        //         isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
-        //     };
-        //
-        // case RECEIVED_ADD_ADMIN:
-        //     return {
-        //         ...state,
-        //         actionTime: action && action.time ?  action && action.time : currentTime,
-        //         isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-        //         isAdminAdded: true,
-        //         isError: false,
-        //         errorMessage: '',
-        //     };
-        //
-        // case ERROR_ADD_ADMIN:
-        //     return {
-        //         ...state,
-        //         actionTime: action && action.time ?  action && action.time : currentTime,
-        //         isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-        //         isAdminAdded: false,
-        //         isError: true,
-        //         errorMessage: action && action.msg,
-        //     };
+        case REQUEST_JOB_DETAIL:
+            return {
+                ...state,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
+            };
+
+        case RECEIVED_JOB_DETAIL:
+            return {
+                ...state,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
+                jobDetail: action && action.jobDetail ? action && action.jobDetail : initialState.jobDetail,
+            };
+
+        case ERROR_JOB_DETAIL:
+            return {
+                ...state,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
+            };
+
+        case REQUEST_BROWSE_JOB:
+            return {
+                ...state,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
+            };
+
+        case RECEIVED_BROWSE_JOB:
+            return {
+                ...state,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
+                isBrowseSuccess: true,
+            };
+
+        case ERROR_BROWSE_JOB:
+            return {
+                ...state,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
+                isBrowseSuccess: false,
+            };
 
         default:
             return { ...state };
