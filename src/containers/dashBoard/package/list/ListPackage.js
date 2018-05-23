@@ -4,40 +4,40 @@ import React, {PureComponent} from 'react';
 import { moneyFormater, str30Format } from "../../../../helpers/index";
 import { Link } from 'react-router-dom';
 
-class ListJob extends PureComponent<Props, State> {
+class ListPackage extends PureComponent<Props, State> {
     componentDidMount() {
         const {
             actions: {
-                getListJobIfNeed,
-                enterListJob,
+                getListPackageIfNeed,
+                enterListPackage,
             }
         } = this.props;
-        enterListJob();
-        getListJobIfNeed();
+        enterListPackage();
+        getListPackageIfNeed();
     }
 
     componentWillUnmount() {
-        this.props.actions.leaveListJob();
+        this.props.actions.leaveListPackage();
     }
 
     render() {
-        const { jobs } = this.props;
+        const { packages } = this.props;
 
-        const jobsJSX = jobs.map((j, index) => (
+        const packagesJSX = packages.map((p, index) => (
             <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{str30Format(j.name)}</td>
-                <td>{j.userPost.name}</td>
-                <td>{str30Format(j.content)}</td>
-                <td>{moneyFormater(j.priceExpected)}</td>
+                <td>{str30Format(p.name)}</td>
+                <td>{p.userPost.name}</td>
+                <td>{str30Format(p.expectedResult)}</td>
+                <td>{moneyFormater(p.priceExpected)}</td>
                 <td>
                     {
-                        j.isAdminBrowsed ? (<label className="badge badge-teal">Đã duyệt</label>)
+                        p.isAdminBrowsed ? (<label className="badge badge-teal">Đã duyệt</label>)
                             : (<label className="badge badge-warning">Chờ xử lý</label>)
                     }
                 </td>
                 <td className="text-right">
-                    <Link to={`/dashboard/job/${j._id}`} className="btn btn-outline-success btn-sm">
+                    <Link to={`/dashboard/package/${p._id}`} className="btn btn-outline-success btn-sm">
                         Xem chi tiết
                     </Link>
                 </td>
@@ -51,7 +51,7 @@ class ListJob extends PureComponent<Props, State> {
                         <div className="card">
                             <div className="card-body">
                                 <div className="card-list-header">
-                                    <h5 className="card-title mb-4" style={{ padding: 7 }}>Danh sách công việc</h5>
+                                    <h5 className="card-title mb-4" style={{ padding: 7 }}>Danh sách gói công việc</h5>
                                 </div>
                                 <div className="table-responsive">
                                     <table className="table center-aligned-table table-striped">
@@ -60,7 +60,7 @@ class ListJob extends PureComponent<Props, State> {
                                             <th className="border-bottom-0">No.</th>
                                             <th className="border-bottom-0">Tên</th>
                                             <th className="border-bottom-0">Người đăng</th>
-                                            <th className="border-bottom-0">Mô tả</th>
+                                            <th className="border-bottom-0">Kết quả</th>
                                             <th className="border-bottom-0">Mức giá</th>
                                             <th className="border-bottom-0">Tình trạng</th>
                                             <th className="border-bottom-0 text-right">Hành động</th>
@@ -68,7 +68,7 @@ class ListJob extends PureComponent<Props, State> {
                                         </thead>
                                         <tbody>
                                         {
-                                            jobsJSX
+                                            packagesJSX
                                         }
                                         </tbody>
                                     </table>
@@ -82,4 +82,4 @@ class ListJob extends PureComponent<Props, State> {
     }
 }
 
-export default ListJob;
+export default ListPackage;

@@ -10,6 +10,10 @@ import {
     LEAVE_LIST_JOB_VIEW,
     ENTER_JOB_DETAIL_VIEW,
     LEAVE_JOB_DETAIL_VIEW,
+    ENTER_LIST_PACKAGE_VIEW,
+    LEAVE_LIST_PACKAGE_VIEW,
+    ENTER_PACKAGE_DETAIL_VIEW,
+    LEAVE_PACKAGE_DETAIL_VIEW,
     ENTER_DASHBOARD_VIEW,
     LEAVE_DASHBOARD_VIEW,
     ENTER_LIST_CATEGORY_VIEW,
@@ -154,6 +158,42 @@ export function leaveJobDetail(time: string = moment().format()) {
     return {
         type:         LEAVE_JOB_DETAIL_VIEW,
         currentView:  'JobDetail',
+        enterTime:    null,
+        leaveTime:    time
+    };
+}
+
+export function enterListPackage(time: string = moment().format()) {
+    return {
+        type:         ENTER_LIST_PACKAGE_VIEW,
+        currentView:  'ListPackage',
+        enterTime:    time,
+        leaveTime:    null
+    };
+}
+
+export function leaveListPackage(time: string = moment().format()) {
+    return {
+        type:         LEAVE_LIST_PACKAGE_VIEW,
+        currentView:  'ListPackage',
+        enterTime:    null,
+        leaveTime:    time
+    };
+}
+
+export function enterPackageDetail(time: string = moment().format()) {
+    return {
+        type:         ENTER_PACKAGE_DETAIL_VIEW,
+        currentView:  'PackageDetail',
+        enterTime:    time,
+        leaveTime:    null
+    };
+}
+
+export function leavePackageDetail(time: string = moment().format()) {
+    return {
+        type:         LEAVE_PACKAGE_DETAIL_VIEW,
+        currentView:  'PackageDetail',
         enterTime:    null,
         leaveTime:    time
     };
