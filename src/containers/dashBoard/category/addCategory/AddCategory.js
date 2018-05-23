@@ -50,7 +50,7 @@ class AddCategory extends PureComponent<Props, State> {
                     className={'form-control'}
                     id={id}
                     value={fieldValue}
-                    onChange={e => this.setState({[input.name]: e.target.value.trim()})}
+                    onChange={e => this.setState({[input.name]: e.target.value})}
                 />
                 {touched && ((error && <label className="text-danger" style={{ marginTop: 5 }}>{`* ${error}`}</label>) ||
                     (warning && <label className="text-danger" style={{ marginTop: 5 }}>{`* ${warning}`}</label>))}
