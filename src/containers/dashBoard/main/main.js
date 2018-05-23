@@ -4,6 +4,7 @@ import React, {
     Component
 }                             from 'react';
 import DashRoutes             from '../../../routes/DashRoutes';
+import { Link } from 'react-router-dom';
 
 class Main extends Component {
     constructor(props) {
@@ -31,6 +32,11 @@ class Main extends Component {
         e.preventDefault();
         this.props.actions.onLogout();
     }
+
+    checkUrl = str => {
+        const url = window.location.href;
+        return url.endsWith(str);
+    };
 
     render() {
         return (
@@ -203,47 +209,47 @@ class Main extends Component {
                                     </div>
                                 </div>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/dashboard">
+                            <li className={`nav-item ${this.checkUrl('/dashboard') ? 'm-active' : 'm-unactive'}`}>
+                                <Link className="nav-link" to="/dashboard">
                                     <img className="menu-icon" src="/images/menu_icons/01.png" alt="menu icon"/>
                                     <span className="menu-title">Dashboard</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/dashboard/admins">
+                            <li className={`nav-item ${this.checkUrl('/dashboard/admins') ? 'm-active' : 'm-unactive'}`}>
+                                <Link className="nav-link" to="/dashboard/admins">
                                     <img className="menu-icon" src="/images/menu_icons/08.png" alt="menu icon"/>
                                     <span className="menu-title">Admin</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/dashboard/jobs">
+                            <li className={`nav-item ${this.checkUrl('/dashboard/jobs') ? 'm-active' : 'm-unactive'}`}>
+                                <Link className="nav-link" to="/dashboard/jobs">
                                     <img className="menu-icon" src="/images/menu_icons/04.png" alt="menu icon"/>
                                     <span className="menu-title">Công việc</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/dashboard/packages">
+                            <li className={`nav-item ${this.checkUrl('/dashboard/packages') ? 'm-active' : 'm-unactive'}`}>
+                                <Link className="nav-link" to="/dashboard/packages">
                                     <img className="menu-icon" src="/images/menu_icons/05.png" alt="menu icon"/>
                                     <span className="menu-title">Gói công việc</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/dashboard/categories">
+                            <li className={`nav-item ${this.checkUrl('/dashboard/categories') ? 'm-active' : 'm-unactive'}`}>
+                                <Link className="nav-link" to="/dashboard/categories">
                                     <img className="menu-icon" src="/images/menu_icons/06.png" alt="menu icon"/>
                                     <span className="menu-title">Lĩnh vực</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/dashboard/skills">
+                            <li className={`nav-item ${this.checkUrl('/dashboard/skills') ? 'm-active' : 'm-unactive'}`}>
+                                <Link className="nav-link" to="/dashboard/skills">
                                     <img className="menu-icon" src="/images/menu_icons/03.png" alt="menu icon"/>
                                     <span className="menu-title">Kỹ năng</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/dashboard/users">
+                            <li className={`nav-item ${this.checkUrl('/dashboard/users') ? 'm-active' : 'm-unactive'}`}>
+                                <Link className="nav-link" to="/dashboard/users">
                                     <img className="menu-icon" src="/images/menu_icons/07.png" alt="menu icon"/>
                                     <span className="menu-title">Người dùng</span>
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </nav>
@@ -251,10 +257,12 @@ class Main extends Component {
                         <DashRoutes />
                         <footer className="footer">
                             <div className="container-fluid clearfix">
-                                <span className="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2018 <a
-                                    href="http://www.bootstrapdash.com/" target="_blank" rel="noopener noreferrer">Bootstrapdash</a>. All rights reserved.</span>
-                                <span className="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i
-                                    className="mdi mdi-heart text-danger"/></span>
+                                <span className="text-muted d-block text-center text-sm-left d-sm-inline-block">
+                                    @2018 - Powered by LancerVN. All Right Reserved.
+                                </span>
+                                <span className="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with
+                                    <i className="mdi mdi-heart text-danger"/>
+                                </span>
                             </div>
                         </footer>
                     </div>

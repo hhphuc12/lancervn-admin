@@ -4,6 +4,7 @@ import { listCategory, postAddCategory, detailCategory } from "./category";
 import { listSkill, postSkill } from "./skill";
 import { listUser, getDetailUser } from "./user";
 import { listJob, jobDetail, postBrowseJob } from './job';
+import { listPackage, packageDetail, postBrowsePackage } from './package';
 
 import request                         from '../promisedHttpRequest';
 
@@ -27,4 +28,7 @@ export {
     listJob,
     jobDetail,
     postBrowseJob,
+    listPackage,
+    packageDetail,
+    postBrowsePackage,
 };
