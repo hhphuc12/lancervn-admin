@@ -3,6 +3,7 @@ import { listAdmin, postAdmin } from "./admin";
 import { listCategory, postAddCategory, detailCategory } from "./category";
 import { listSkill, postSkill } from "./skill";
 import { listUser, getDetailUser } from "./user";
+import { listJob } from './job';
 
 import request                         from '../promisedHttpRequest';
 
@@ -23,4 +24,5 @@ export {
     postSkill,
     listUser,
     getDetailUser,
+    listJob,
 };

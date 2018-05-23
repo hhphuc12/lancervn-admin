@@ -27,7 +27,7 @@ export const getNewRequestNoBody = (url: string, method: string, token = null, h
     let originHeaders = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'x-access-token': token
+        'admin-access-token': token
     };
     let customHeaders = Object.assign(headers, originHeaders);
     const request = new Request(url, {
@@ -41,7 +41,7 @@ export const getNewRequestHasBody = (url: string, method: string, data: any, tok
     let originHeaders = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'x-access-token': token
+        'admin-access-token': token
     };
 
     if(data instanceof FormData) {
@@ -70,6 +70,14 @@ export const dateFormatter = (date: string) => {
     const year = d.getFullYear();
     return `${day}/${month}/${year}`;
 };
+
+export const str30Format = str => {
+    if (!str.length) return '---';
+    if (str.length < 30) return str;
+    return `${str.substring(0, 30)}...`;
+};
+
+export const moneyFormater = money => money ? money.replace(/\B(?=(\d{3})+(?!\d))/g, ".") : '---';
 
 export const changePreview = (image, placeToInsertImagePreview) => {
     $(placeToInsertImagePreview + ' img').remove();

@@ -183,7 +183,7 @@ class Main extends Component {
                         </ul>
                         <button className="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
                                 type="button" data-toggle="offcanvas">
-                            <span className="icon-menu"></span>
+                            <span className="icon-menu"/>
                         </button>
                     </div>
                 </nav>
@@ -204,7 +204,7 @@ class Main extends Component {
                                 </div>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="index.html">
+                                <a className="nav-link" href="/dashboard">
                                     <img className="menu-icon" src="/images/menu_icons/01.png" alt="menu icon"/>
                                     <span className="menu-title">Dashboard</span>
                                 </a>
@@ -216,13 +216,13 @@ class Main extends Component {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="pages/forms/basic_elements.html">
+                                <a className="nav-link" href="/dashboard/jobs">
                                     <img className="menu-icon" src="/images/menu_icons/04.png" alt="menu icon"/>
                                     <span className="menu-title">Công việc</span>
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="pages/charts/chartjs.html">
+                                <a className="nav-link" href="/dashboard/packages">
                                     <img className="menu-icon" src="/images/menu_icons/05.png" alt="menu icon"/>
                                     <span className="menu-title">Gói công việc</span>
                                 </a>
@@ -243,12 +243,6 @@ class Main extends Component {
                                 <a className="nav-link" href="/dashboard/users">
                                     <img className="menu-icon" src="/images/menu_icons/07.png" alt="menu icon"/>
                                     <span className="menu-title">Người dùng</span>
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="pages/ui-features/typography.html">
-                                    <img className="menu-icon" src="/images/menu_icons/09.png" alt="menu icon"/>
-                                    <span className="menu-title">Thống kê</span>
                                 </a>
                             </li>
                         </ul>

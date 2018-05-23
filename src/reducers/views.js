@@ -9,6 +9,7 @@ import {
     ENTER_DETAIL_CATEGORY_VIEW,
     ENTER_LIST_SKILL_VIEW,
     ENTER_ADD_SKILL_VIEW,
+    ENTER_LIST_JOB_VIEW,
     LEAVE_LOGIN_VIEW,
     LEAVE_DASHBOARD_VIEW,
     LEAVE_LIST_ADMIN_VIEW,
@@ -18,6 +19,7 @@ import {
     LEAVE_DETAIL_CATEGORY_VIEW,
     LEAVE_LIST_SKILL_VIEW,
     LEAVE_ADD_SKILL_VIEW,
+    LEAVE_LIST_JOB_VIEW,
 } from '../constants/viewTypes';
 
 const initialState = {
@@ -37,6 +39,7 @@ export default function views(state: Object = initialState, action: Object) {
         case ENTER_DETAIL_CATEGORY_VIEW:
         case ENTER_LIST_SKILL_VIEW:
         case ENTER_ADD_SKILL_VIEW:
+        case ENTER_LIST_JOB_VIEW:
             // can't enter if you are already inside
             if (state.currentView !== action.currentView) {
                 return {
@@ -56,6 +59,7 @@ export default function views(state: Object = initialState, action: Object) {
         case LEAVE_DETAIL_CATEGORY_VIEW:
         case LEAVE_LIST_SKILL_VIEW:
         case LEAVE_ADD_SKILL_VIEW:
+        case LEAVE_LIST_JOB_VIEW:
             // can't leave if you aren't already inside
             if (state.currentView === action.currentView) {
                 return {
