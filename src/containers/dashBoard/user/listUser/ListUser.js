@@ -2,6 +2,7 @@
 
 import React, {PureComponent} from 'react';
 import { dateFormatter } from "../../../../helpers/index";
+import swal from "sweetalert";
 
 class ListUser extends PureComponent<Props, State> {
     componentDidMount() {
@@ -19,6 +20,27 @@ class ListUser extends PureComponent<Props, State> {
         this.props.actions.leaveListUser();
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.isDataChange) {
+            swal("Xong!", "Thao tác thành công!", "success");
+            nextProps.actions.getUsersIfNeed();
+            nextProps.actions.resetDataChangeState();
+        }
+    }
+
+    onBlock = (event, userId) => {
+        event.preventDefault();
+        const { changeBlockStateUserIfNeed, errorBadRequest } = this.props.actions;
+        try {
+            changeBlockStateUserIfNeed(userId);
+        } catch (error) {
+            errorBadRequest();
+            /* eslint-disable no-console */
+            console.log('browse package went wrong..., error: ', error);
+            /* eslint-enable no-console */
+        }
+    };
+
     render() {
         const { users } = this.props;
         const usersJSX = users.map((user, index) => (
@@ -29,6 +51,14 @@ class ListUser extends PureComponent<Props, State> {
                 <td className="table-cell-content">{user.occupation}</td>
                 <td className="table-cell-content">{dateFormatter(user.createdAt)}</td>
                 <td className="text-right">
+                    <a
+                        href="#"
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={e => this.onBlock(e, user._id)}
+                        style={{ marginRight: '0.5rem' }}
+                    >
+                        {user.isBlocked ? 'Mở khóa' : 'Khóa'}
+                    </a>
                     <a href="#" className="btn btn-outline-success btn-sm">
                         Chi tiết
                     </a>

@@ -9,7 +9,7 @@ export const listUser = () => {
     return request.get(url);
 };
 
-export const getDetailUser = id => {
-    const url = `${API_URI}admin/user?id=${id}`;
-    return request.get(url);
+export const postChangeBlockStateUser = (id, token) => {
+    const url = `${API_URI}admin/change-block-state-user`;
+    return request.post(url, { id }, token);
 };
