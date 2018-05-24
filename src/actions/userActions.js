@@ -1,15 +1,17 @@
 // @flow weak
 import moment from 'moment';
-import { listUser, getDetailUser } from '../services/api';
+import { listUser, postChangeBlockStateUser } from '../services/api';
 import {
     REQUEST_LIST_USER,
     RECEIVED_LIST_USER,
     ERROR_LIST_USER,
-    REQUEST_DETAIL_USER,
-    RECEIVED_DETAIL_USER,
-    ERROR_DETAIL_USER,
+    REQUEST_CHANGE_BLOCK_STATE_USER,
+    RECEIVED_CHANGE_BLOCK_STATE_USER,
+    ERROR_CHANGE_BLOCK_STATE_USER,
+    RESET_DATA_CHANGE_STATE,
 } from "../constants/userType";
 import { errorBadRequest } from './errorActions';
+import auth from "../services/auth";
 
 function requestListUsers(time = moment().format()) {
     return {
@@ -72,42 +74,41 @@ function getUsers() {
     };
 };
 
-function requestDetailUser(time = moment().format()) {
+function requestChangeBlockStateUser(time = moment().format()) {
     return {
-        type:       REQUEST_DETAIL_USER,
+        type:       REQUEST_CHANGE_BLOCK_STATE_USER,
         isFetching: true,
         time
     };
 }
-function receivedDetailUser(user, time = moment().format()) {
+function receivedChangeBlockStateUser(time = moment().format()) {
     return {
-        type:       RECEIVED_DETAIL_USER,
+        type:       RECEIVED_CHANGE_BLOCK_STATE_USER,
         isFetching: false,
-        user,
         time
     };
 }
-function errorDetailUser(time = moment().format()) {
+function errorChangeBlockStateUser(time = moment().format()) {
     return {
-        type:       ERROR_DETAIL_USER,
+        type:       ERROR_CHANGE_BLOCK_STATE_USER,
         isFetching: false,
         time
     };
 }
 
-export function getUserIfNeed(id): (...any) => Promise<any> {
+export function changeBlockStateUserIfNeed(id): (...any) => Promise<any> {
     return (
         dispatch: (any) => any,
         getState: () => boolean,
     ): any => {
-        if(shouldGetDetailUser(getState())) {
-            return dispatch(detailUser(id));
+        if(shouldChangeBlockStateUser(getState())) {
+            return dispatch(changeBlockStateUser(id));
         }
         return Promise.resolve('already fetching user...');
     }
 }
 
-function shouldGetDetailUser(
+function shouldChangeBlockStateUser(
     state: any
 ): boolean {
     const isFetching = state.user.isFetching;
@@ -117,18 +118,27 @@ function shouldGetDetailUser(
     return true;
 }
 
-function detailUser(user) {
+function changeBlockStateUser(id) {
     return dispatch => {
-        dispatch(requestDetailUser());
-        getDetailUser(user)
+        dispatch(requestChangeBlockStateUser());
+        const adminToken = auth.getToken();
+        postChangeBlockStateUser(id, adminToken)
             .then(res => {
-                if (res.status !== 201)
+                if (res.status !== 200)
                     return dispatch(errorBadRequest(res.status));
-                dispatch(receivedDetailUser());
+                dispatch(receivedChangeBlockStateUser());
             })
             .catch(res => {
-                dispatch(errorDetailUser());
+                dispatch(errorChangeBlockStateUser());
                 dispatch(errorBadRequest(400));
             });
     };
 };
+
+export function resetDataChangeState(time = moment().format()) {
+    return {
+        type:       RESET_DATA_CHANGE_STATE,
+        isFetching: false,
+        time
+    };
+}
