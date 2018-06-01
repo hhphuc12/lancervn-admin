@@ -5,6 +5,7 @@ import React, {
 }                             from 'react';
 import DashRoutes             from '../../../routes/DashRoutes';
 import { Link } from 'react-router-dom';
+import auth from '../../../services/auth';
 
 class Main extends Component {
     constructor(props) {
@@ -203,8 +204,8 @@ class Main extends Component {
                                         <span className="online-status online"/>
                                     </div>
                                     <div className="profile-name">
-                                        <p className="name">Richard V.Welsh</p>
-                                        <p className="designation">Manager</p>
+                                        <p className="name">Admin</p>
+                                        <p className="designation">Quản trị viên</p>
                                         <div className="badge badge-teal mx-auto mt-3">Online</div>
                                     </div>
                                 </div>

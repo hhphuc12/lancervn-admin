@@ -36,13 +36,13 @@ function errorListUsers(time = moment().format()) {
     };
 }
 
-export function getUsersIfNeed(): (...any) => Promise<any> {
+export function getUsersIfNeed(page, search): (...any) => Promise<any> {
     return (
         dispatch: (any) => any,
         getState: () => boolean,
     ): any => {
         if(shouldGetUsers(getState())) {
-            return dispatch(getUsers());
+            return dispatch(getUsers(page, search));
         }
         return Promise.resolve('already fetching users...');
     }
@@ -58,10 +58,10 @@ function shouldGetUsers(
     return true;
 }
 
-function getUsers() {
+function getUsers(page, search) {
     return dispatch => {
         dispatch(requestListUsers());
-        listUser()
+        listUser(page, search)
             .then(res => {
                 if (res.status !== 200)
                     return dispatch(errorBadRequest(res.status));
