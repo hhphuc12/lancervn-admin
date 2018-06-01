@@ -13,7 +13,7 @@ class ListUser extends PureComponent<Props, State> {
             }
         } = this.props;
         enterListUser();
-        getUsersIfNeed();
+        getUsersIfNeed(1);
     }
 
     componentWillUnmount() {
@@ -38,6 +38,16 @@ class ListUser extends PureComponent<Props, State> {
             /* eslint-disable no-console */
             console.log('browse package went wrong..., error: ', error);
             /* eslint-enable no-console */
+        }
+    };
+
+    onSearch = async (
+        event: SyntheticEvent<>
+    ) => {
+        const search = event.target.value;
+        this.setState({ search });
+        if (event.key === 'Enter') {
+            this.props.actions.getUsersIfNeed(1, search);
         }
     };
 
@@ -74,6 +84,23 @@ class ListUser extends PureComponent<Props, State> {
                             <div className="card-body">
                                 <div className="card-list-header">
                                     <h5 className="card-title mb-4" style={{ padding: 7 }}>Users</h5>
+                                </div>
+                                <div className="form-group">
+                                    <div className="input-group">
+                                        <div className="input-group-prepend bg-primary border-primary">
+                                        <span className="input-group-text bg-transparent">
+                                            <i className="fa fa-search text-white"/>
+                                        </span>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="Nhập thông tin tìm kiếm"
+                                            aria-label="Tìm kiếm"
+                                            aria-describedby="colored-addon2"
+                                            onKeyPress={e => this.onSearch(e)}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="table-responsive">
                                     <table className="table center-aligned-table table-striped">

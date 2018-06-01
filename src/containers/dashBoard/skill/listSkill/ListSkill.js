@@ -2,6 +2,7 @@
 
 import React, {PureComponent} from 'react';
 import { dateFormatter } from "../../../../helpers";
+import ReactPaginate from 'react-paginate';
 
 class ListSkill extends PureComponent<Props, State> {
     componentDidMount() {
@@ -18,6 +19,20 @@ class ListSkill extends PureComponent<Props, State> {
     componentWillUnmount() {
         this.props.actions.leaveListSkill();
     }
+
+    handlePageClick = (data) => {
+        let selected = data.selected;
+        let offset = Math.ceil(selected * this.props.perPage);
+
+        this.setState({offset: offset}, () => {
+            console.log('hiihi');
+        });
+    };
+
+    state = {
+        data: [],
+        offset: 0
+    };
 
     render() {
         const { skills } = this.props;
@@ -67,6 +82,19 @@ class ListSkill extends PureComponent<Props, State> {
                                         }
                                         </tbody>
                                     </table>
+                                    <ReactPaginate
+                                        previousLabel={"previous"}
+                                        nextLabel={"next"}
+                                        breakLabel={<a href="">...</a>}
+                                        breakClassName={"break-me"}
+                                        pageCount={this.state.pageCount}
+                                        marginPagesDisplayed={2}
+                                        pageRangeDisplayed={5}
+                                        onPageChange={this.handlePageClick}
+                                        containerClassName={"pagination"}
+                                        subContainerClassName={"pages pagination"}
+                                        activeClassName={"active"}
+                                    />
                                 </div>
                             </div>
                         </div>
