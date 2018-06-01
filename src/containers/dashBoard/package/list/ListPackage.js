@@ -3,6 +3,7 @@
 import React, {PureComponent} from 'react';
 import { moneyFormater, str30Format } from "../../../../helpers/index";
 import { Link } from 'react-router-dom';
+import { MaterialProgress } from "../../../../components";
 
 class ListPackage extends PureComponent<Props, State> {
     componentDidMount() {
@@ -22,6 +23,12 @@ class ListPackage extends PureComponent<Props, State> {
 
     render() {
         const { packages } = this.props;
+        if (packages.length === 0)
+            return (
+                <div className="content-wrapper loading-wrapper">
+                    <MaterialProgress/>
+                </div>
+            );
 
         const packagesJSX = packages.map((p, index) => (
             <tr key={index}>

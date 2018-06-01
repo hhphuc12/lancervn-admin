@@ -1,6 +1,7 @@
 // @flow strong
 
 import React, {PureComponent} from 'react';
+import { MaterialProgress } from '../../../../components';
 import { dateFormatter } from "../../../../helpers/index";
 import swal from "sweetalert";
 
@@ -53,6 +54,13 @@ class ListUser extends PureComponent<Props, State> {
 
     render() {
         const { users } = this.props;
+        if (users.length === 0)
+            return (
+                <div className="content-wrapper loading-wrapper">
+                    <MaterialProgress/>
+                </div>
+            );
+
         const usersJSX = users.map((user, index) => (
             <tr key={index}>
                 <td className="table-cell-content">{index + 1}</td>

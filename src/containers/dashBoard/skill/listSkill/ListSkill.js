@@ -2,6 +2,7 @@
 
 import React, {PureComponent} from 'react';
 import { dateFormatter } from "../../../../helpers";
+import { MaterialProgress } from "../../../../components";
 import ReactPaginate from 'react-paginate';
 
 class ListSkill extends PureComponent<Props, State> {
@@ -36,6 +37,13 @@ class ListSkill extends PureComponent<Props, State> {
 
     render() {
         const { skills } = this.props;
+        if (skills.length === 0)
+            return (
+                <div className="content-wrapper loading-wrapper">
+                    <MaterialProgress/>
+                </div>
+            );
+
         const skillsJSX = skills.map((skill, index) => (
             <tr key={index}>
                 <td>{index + 1}</td>
