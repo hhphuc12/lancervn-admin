@@ -2,6 +2,8 @@
 
 import React, {PureComponent} from 'react';
 import { dateFormatter } from "../../../../helpers";
+import { MaterialProgress } from "../../../../components";
+import ReactPaginate from 'react-paginate';
 
 class ListSkill extends PureComponent<Props, State> {
     componentDidMount() {
@@ -19,8 +21,29 @@ class ListSkill extends PureComponent<Props, State> {
         this.props.actions.leaveListSkill();
     }
 
+    handlePageClick = (data) => {
+        let selected = data.selected;
+        let offset = Math.ceil(selected * this.props.perPage);
+
+        this.setState({offset: offset}, () => {
+            console.log('hiihi');
+        });
+    };
+
+    state = {
+        data: [],
+        offset: 0
+    };
+
     render() {
         const { skills } = this.props;
+        if (skills.length === 0)
+            return (
+                <div className="content-wrapper loading-wrapper">
+                    <MaterialProgress/>
+                </div>
+            );
+
         const skillsJSX = skills.map((skill, index) => (
             <tr key={index}>
                 <td>{index + 1}</td>
@@ -67,6 +90,19 @@ class ListSkill extends PureComponent<Props, State> {
                                         }
                                         </tbody>
                                     </table>
+                                    <ReactPaginate
+                                        previousLabel={"previous"}
+                                        nextLabel={"next"}
+                                        breakLabel={<a href="">...</a>}
+                                        breakClassName={"break-me"}
+                                        pageCount={this.state.pageCount}
+                                        marginPagesDisplayed={2}
+                                        pageRangeDisplayed={5}
+                                        onPageChange={this.handlePageClick}
+                                        containerClassName={"pagination"}
+                                        subContainerClassName={"pages pagination"}
+                                        activeClassName={"active"}
+                                    />
                                 </div>
                             </div>
                         </div>

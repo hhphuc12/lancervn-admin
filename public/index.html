@@ -100,25 +100,25 @@
     To begin the development, run `npm start` or `yarn start`.
     To create a production bundle, use `npm run build` or `yarn build`.
   -->
-  <script type="text/javascript">
-      // loading fadeOut pure vanilla JS (I9+)
-      ;(function(){
-          document.addEventListener("DOMContentLoaded", function(event) {
-              var el = document.querySelector('.loader');
-              fadeOut(el);
-          });
-          function fadeOut(el){
-              el.style.opacity = 1;
-              (function fade() {
-                  if ((el.style.opacity -= .1) < 0.15) {
-                      el.style.display = "none";
-                  } else {
-                      requestAnimationFrame(fade);
-                  }
-              })();
-          }
-      })()
-  </script>
+  <!--<script type="text/javascript">-->
+      <!--// loading fadeOut pure vanilla JS (I9+)-->
+      <!--;(function(){-->
+          <!--document.addEventListener("DOMContentLoaded", function(event) {-->
+              <!--var el = document.querySelector('.loader');-->
+              <!--fadeOut(el);-->
+          <!--});-->
+          <!--function fadeOut(el){-->
+              <!--el.style.opacity = 1;-->
+              <!--(function fade() {-->
+                  <!--if ((el.style.opacity -= .1) < 0.15) {-->
+                      <!--el.style.display = "none";-->
+                  <!--} else {-->
+                      <!--requestAnimationFrame(fade);-->
+                  <!--}-->
+              <!--})();-->
+          <!--}-->
+      <!--})()-->
+  <!--</script>-->
   <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/libs/bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/js/main.js"></script>
@@ -130,7 +130,6 @@
   <script src="/js/off-canvas.js"></script>
   <script src="/js/misc.js"></script>
   <script src="/js/dashboard.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NXz9eVnyJOA81wimI8WYE08kW_JMe8g&callback=initMap" async defer></script>
   <script src="/js/maps.js"></script>
   </body>
 </html>

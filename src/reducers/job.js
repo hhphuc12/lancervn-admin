@@ -1,26 +1,24 @@
 // @flow weak
 import {
-    REQUEST_LIST_CATEGORY,
-    RECEIVED_LIST_CATEGORY,
-    ERROR_LIST_CATEGORY,
-    REQUEST_ADD_CATEGORY,
-    RECEIVED_ADD_CATEGORY,
-    ERROR_ADD_CATEGORY,
-    REQUEST_DETAIL_CATEGORY,
-    RECEIVED_DETAIL_CATEGORY,
-    ERROR_DETAIL_CATEGORY,
-    RESET_ADD_STATE,
-} from "../constants/categoryType";
+    REQUEST_LIST_JOB,
+    RECEIVED_LIST_JOB,
+    ERROR_LIST_JOB,
+    REQUEST_BROWSE_JOB,
+    RECEIVED_BROWSE_JOB,
+    ERROR_BROWSE_JOB,
+    REQUEST_JOB_DETAIL,
+    RECEIVED_JOB_DETAIL,
+    ERROR_JOB_DETAIL,
+} from "../constants/jobType";
 import moment from "moment/moment";
 
 const initialState = {
-    categories: [],
+    jobs: [],
+    jobDetail: {},
+    isBrowseSuccess: false,
     isFetching: false,
-    isCategoryAdded: false,
     isError: false,
     errorMessage: '',
-    name: '',
-    listChild: [],
 };
 
 const currentTime = moment().format();
@@ -30,87 +28,71 @@ export default function (
     action
 ) {
     switch (action.type) {
-        case REQUEST_LIST_CATEGORY:
+        case REQUEST_LIST_JOB:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
             };
 
-        case RECEIVED_LIST_CATEGORY:
+        case RECEIVED_LIST_JOB:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                categories: action && action.categories ? action && action.categories : initialState.categories,
+                jobs: action && action.jobs ? action && action.jobs : initialState.jobs,
             };
 
-        case ERROR_LIST_CATEGORY:
-            return {
-                ...state,
-                actionTime: action && action.time ?  action && action.time : currentTime,
-                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
-            };
-
-        case REQUEST_ADD_CATEGORY:
-            return {
-                ...state,
-                actionTime: action && action.time ?  action && action.time : currentTime,
-                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
-            };
-
-        case RECEIVED_ADD_CATEGORY:
-            return {
-                ...state,
-                actionTime: action && action.time ?  action && action.time : currentTime,
-                isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                isCategoryAdded: true,
-                isError: false,
-                errorMessage: '',
-            };
-
-        case ERROR_ADD_CATEGORY:
+        case ERROR_LIST_JOB:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                isCategoryAdded: false,
-                isError: true,
-                errorMessage: action && action.msg,
             };
 
-        case REQUEST_DETAIL_CATEGORY:
+        case REQUEST_JOB_DETAIL:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
             };
 
-        case RECEIVED_DETAIL_CATEGORY:
-            const { name, listChild } = action && action.category;
+        case RECEIVED_JOB_DETAIL:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                isError: false,
-                errorMessage: '',
-                name,
-                listChild,
+                jobDetail: action && action.jobDetail ? action && action.jobDetail : initialState.jobDetail,
             };
 
-        case ERROR_DETAIL_CATEGORY:
+        case ERROR_JOB_DETAIL:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                isError: true,
-                errorMessage: '',
             };
 
-        case RESET_ADD_STATE:
+        case REQUEST_BROWSE_JOB:
             return {
                 ...state,
-                isCategoryAdded: false,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
+            };
+
+        case RECEIVED_BROWSE_JOB:
+            return {
+                ...state,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
+                isBrowseSuccess: true,
+            };
+
+        case ERROR_BROWSE_JOB:
+            return {
+                ...state,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
+                isBrowseSuccess: false,
             };
 
         default:

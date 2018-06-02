@@ -16,6 +16,7 @@ const mapStateToProps = (state) => {
         isError:         state.category.isError,
         errorMessage:    state.category.errorMessage,
         isFetching:      state.category.isFetching,
+        isCategoryAdded: state.category.isCategoryAdded,
 
         name:            state.category.name,
         listChild:       state.category.listChild,

@@ -1,26 +1,24 @@
 // @flow weak
 import {
-    REQUEST_LIST_CATEGORY,
-    RECEIVED_LIST_CATEGORY,
-    ERROR_LIST_CATEGORY,
-    REQUEST_ADD_CATEGORY,
-    RECEIVED_ADD_CATEGORY,
-    ERROR_ADD_CATEGORY,
-    REQUEST_DETAIL_CATEGORY,
-    RECEIVED_DETAIL_CATEGORY,
-    ERROR_DETAIL_CATEGORY,
-    RESET_ADD_STATE,
-} from "../constants/categoryType";
+    REQUEST_LIST_PACKAGE,
+    RECEIVED_LIST_PACKAGE,
+    ERROR_LIST_PACKAGE,
+    REQUEST_BROWSE_PACKAGE,
+    RECEIVED_BROWSE_PACKAGE,
+    ERROR_BROWSE_PACKAGE,
+    REQUEST_PACKAGE_DETAIL,
+    RECEIVED_PACKAGE_DETAIL,
+    ERROR_PACKAGE_DETAIL,
+} from "../constants/packageType";
 import moment from "moment/moment";
 
 const initialState = {
-    categories: [],
+    packages: [],
+    packageDetail: {},
+    isBrowseSuccess: false,
     isFetching: false,
-    isCategoryAdded: false,
     isError: false,
     errorMessage: '',
-    name: '',
-    listChild: [],
 };
 
 const currentTime = moment().format();
@@ -30,87 +28,71 @@ export default function (
     action
 ) {
     switch (action.type) {
-        case REQUEST_LIST_CATEGORY:
+        case REQUEST_LIST_PACKAGE:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
             };
 
-        case RECEIVED_LIST_CATEGORY:
+        case RECEIVED_LIST_PACKAGE:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                categories: action && action.categories ? action && action.categories : initialState.categories,
+                packages: action && action.packages ? action && action.packages : initialState.packages,
             };
 
-        case ERROR_LIST_CATEGORY:
-            return {
-                ...state,
-                actionTime: action && action.time ?  action && action.time : currentTime,
-                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
-            };
-
-        case REQUEST_ADD_CATEGORY:
-            return {
-                ...state,
-                actionTime: action && action.time ?  action && action.time : currentTime,
-                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
-            };
-
-        case RECEIVED_ADD_CATEGORY:
-            return {
-                ...state,
-                actionTime: action && action.time ?  action && action.time : currentTime,
-                isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                isCategoryAdded: true,
-                isError: false,
-                errorMessage: '',
-            };
-
-        case ERROR_ADD_CATEGORY:
+        case ERROR_LIST_PACKAGE:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                isCategoryAdded: false,
-                isError: true,
-                errorMessage: action && action.msg,
             };
 
-        case REQUEST_DETAIL_CATEGORY:
+        case REQUEST_PACKAGE_DETAIL:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
             };
 
-        case RECEIVED_DETAIL_CATEGORY:
-            const { name, listChild } = action && action.category;
+        case RECEIVED_PACKAGE_DETAIL:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                isError: false,
-                errorMessage: '',
-                name,
-                listChild,
+                packageDetail: action && action.packageDetail ? action && action.packageDetail : initialState.packageDetail,
             };
 
-        case ERROR_DETAIL_CATEGORY:
+        case ERROR_PACKAGE_DETAIL:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                isError: true,
-                errorMessage: '',
             };
 
-        case RESET_ADD_STATE:
+        case REQUEST_BROWSE_PACKAGE:
             return {
                 ...state,
-                isCategoryAdded: false,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
+            };
+
+        case RECEIVED_BROWSE_PACKAGE:
+            return {
+                ...state,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
+                isBrowseSuccess: true,
+            };
+
+        case ERROR_BROWSE_PACKAGE:
+            return {
+                ...state,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
+                isBrowseSuccess: false,
             };
 
         default:

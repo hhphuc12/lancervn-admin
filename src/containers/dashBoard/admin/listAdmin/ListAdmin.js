@@ -2,6 +2,7 @@
 
 import React, {PureComponent} from 'react';
 import { dateFormatter } from "../../../../helpers";
+import { MaterialProgress } from "../../../../components";
 
 class ListAdmin extends PureComponent<Props, State> {
     componentDidMount() {
@@ -21,6 +22,13 @@ class ListAdmin extends PureComponent<Props, State> {
 
     render() {
         const { admins } = this.props;
+        if (admins.length === 0)
+            return (
+                <div className="content-wrapper loading-wrapper">
+                    <MaterialProgress/>
+                </div>
+            );
+
         const adminsJSX = admins.map((admin, index) => (
             <tr key={index}>
                 <td>{index + 1}</td>

@@ -4,6 +4,8 @@ import React, {
     Component
 }                             from 'react';
 import DashRoutes             from '../../../routes/DashRoutes';
+import { Link } from 'react-router-dom';
+import auth from '../../../services/auth';
 
 class Main extends Component {
     constructor(props) {
@@ -31,6 +33,11 @@ class Main extends Component {
         e.preventDefault();
         this.props.actions.onLogout();
     }
+
+    checkUrl = str => {
+        const url = window.location.href;
+        return url.endsWith(str);
+    };
 
     render() {
         return (
@@ -169,11 +176,11 @@ class Main extends Component {
                                     aria-labelledby="accountDropdown"
                                     style={{ marginTop: 8, borderRadius: 4 }}
                                 >
-                                    <a href="#" className="dropdown-item">
+                                    <a href="#" className="dropdown-item profile-dropdown-item">
                                         <img className="profile-dropdown-icon" src="/images/icons/profile.png" />
                                         <p className="mb-0 font-weight-normal float-left">Xem hồ sơ cá nhân</p>
                                     </a>
-                                    <div className="dropdown-divider"/>
+                                    <div className="dropdown-divider profile-dropdown-item"/>
                                     <a href="#" onClick={this.onLogout} className="dropdown-item">
                                         <img className="profile-dropdown-icon" src="/images/icons/log_out.png" alt=""/>
                                         <p className="mb-0 font-weight-normal float-left">Đăng xuất</p>
@@ -183,7 +190,7 @@ class Main extends Component {
                         </ul>
                         <button className="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
                                 type="button" data-toggle="offcanvas">
-                            <span className="icon-menu"></span>
+                            <span className="icon-menu"/>
                         </button>
                     </div>
                 </nav>
@@ -197,59 +204,53 @@ class Main extends Component {
                                         <span className="online-status online"/>
                                     </div>
                                     <div className="profile-name">
-                                        <p className="name">Richard V.Welsh</p>
-                                        <p className="designation">Manager</p>
+                                        <p className="name">Admin</p>
+                                        <p className="designation">Quản trị viên</p>
                                         <div className="badge badge-teal mx-auto mt-3">Online</div>
                                     </div>
                                 </div>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="index.html">
+                            <li className={`nav-item ${this.checkUrl('/dashboard') ? 'm-active' : 'm-unactive'}`}>
+                                <Link className="nav-link" to="/dashboard">
                                     <img className="menu-icon" src="/images/menu_icons/01.png" alt="menu icon"/>
                                     <span className="menu-title">Dashboard</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/dashboard/admins">
+                            <li className={`nav-item ${this.checkUrl('/dashboard/admins') ? 'm-active' : 'm-unactive'}`}>
+                                <Link className="nav-link" to="/dashboard/admins">
                                     <img className="menu-icon" src="/images/menu_icons/08.png" alt="menu icon"/>
                                     <span className="menu-title">Admin</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="pages/forms/basic_elements.html">
+                            <li className={`nav-item ${this.checkUrl('/dashboard/jobs') ? 'm-active' : 'm-unactive'}`}>
+                                <Link className="nav-link" to="/dashboard/jobs">
                                     <img className="menu-icon" src="/images/menu_icons/04.png" alt="menu icon"/>
                                     <span className="menu-title">Công việc</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="pages/charts/chartjs.html">
+                            <li className={`nav-item ${this.checkUrl('/dashboard/packages') ? 'm-active' : 'm-unactive'}`}>
+                                <Link className="nav-link" to="/dashboard/packages">
                                     <img className="menu-icon" src="/images/menu_icons/05.png" alt="menu icon"/>
                                     <span className="menu-title">Gói công việc</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/dashboard/categories">
+                            <li className={`nav-item ${this.checkUrl('/dashboard/categories') ? 'm-active' : 'm-unactive'}`}>
+                                <Link className="nav-link" to="/dashboard/categories">
                                     <img className="menu-icon" src="/images/menu_icons/06.png" alt="menu icon"/>
                                     <span className="menu-title">Lĩnh vực</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="/dashboard/skills">
+                            <li className={`nav-item ${this.checkUrl('/dashboard/skills') ? 'm-active' : 'm-unactive'}`}>
+                                <Link className="nav-link" to="/dashboard/skills">
                                     <img className="menu-icon" src="/images/menu_icons/03.png" alt="menu icon"/>
                                     <span className="menu-title">Kỹ năng</span>
-                                </a>
+                                </Link>
                             </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="pages/icons/font-awesome.html">
+                            <li className={`nav-item ${this.checkUrl('/dashboard/users') ? 'm-active' : 'm-unactive'}`}>
+                                <Link className="nav-link" to="/dashboard/users">
                                     <img className="menu-icon" src="/images/menu_icons/07.png" alt="menu icon"/>
                                     <span className="menu-title">Người dùng</span>
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="pages/ui-features/typography.html">
-                                    <img className="menu-icon" src="/images/menu_icons/09.png" alt="menu icon"/>
-                                    <span className="menu-title">Thống kê</span>
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </nav>
@@ -257,10 +258,12 @@ class Main extends Component {
                         <DashRoutes />
                         <footer className="footer">
                             <div className="container-fluid clearfix">
-                                <span className="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2018 <a
-                                    href="http://www.bootstrapdash.com/" target="_blank" rel="noopener noreferrer">Bootstrapdash</a>. All rights reserved.</span>
-                                <span className="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i
-                                    className="mdi mdi-heart text-danger"/></span>
+                                <span className="text-muted d-block text-center text-sm-left d-sm-inline-block">
+                                    @2018 - Powered by LancerVN. All Right Reserved.
+                                </span>
+                                <span className="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with
+                                    <i className="mdi mdi-heart text-danger"/>
+                                </span>
                             </div>
                         </footer>
                     </div>

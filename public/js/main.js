@@ -15,13 +15,6 @@ $(document).ready(function() {
         $(this).parent().children('ul').toggleClass('active');
     });
 
-    $(window).scroll(function() {
-        if($(this).scrollTop() >= $('._content').offset().top - 100) {
-            $('#back-to-top').addClass('active');
-        } else {
-            $('#back-to-top').removeClass('active');
-        }
-    });
     $(window).on('load', function() {
         $('.owl-stage').parents('.owl-item').remove();
         $('#back-to-top').click(function() {
