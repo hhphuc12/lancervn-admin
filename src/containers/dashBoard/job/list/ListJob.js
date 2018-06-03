@@ -1,54 +1,58 @@
 // @flow strong
 
 import React, {PureComponent} from 'react';
-import { dateFormatter } from "../../../../helpers";
+import { moneyFormater, str30Format } from "../../../../helpers/index";
+import { Link } from 'react-router-dom';
 import { MaterialProgress } from "../../../../components";
 import ReactPaginate from 'react-paginate';
 
-class ListSkill extends PureComponent<Props, State> {
+class ListJob extends PureComponent<Props, State> {
     componentDidMount() {
         const {
             actions: {
-                getSkillsIfNeed,
-                enterListSkill,
+                getListJobIfNeed,
+                enterListJob,
             }
         } = this.props;
-        enterListSkill();
-        getSkillsIfNeed();
+        enterListJob();
+        getListJobIfNeed(1);
     }
 
     componentWillUnmount() {
-        this.props.actions.leaveListSkill();
+        this.props.actions.leaveListJob();
     }
 
     handlePageClick = data => {
         const page = data.selected + 1;
-        this.props.actions.getSkillsIfNeed(page);
-    };
-
-    state = {
-        data: [],
-        offset: 0
+        this.props.actions.getListJobIfNeed(page);
     };
 
     render() {
-        const { skills, pages } = this.props;
-        if (skills.length === 0)
+        const { jobs, pages } = this.props;
+        if (jobs.length === 0)
             return (
                 <div className="content-wrapper loading-wrapper">
                     <MaterialProgress/>
                 </div>
             );
 
-        const skillsJSX = skills.map((skill, index) => (
+        const jobsJSX = jobs.map((j, index) => (
             <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{skill.name}</td>
-                <td>{dateFormatter(skill.updatedAt)}</td>
+                <td>{str30Format(j.name)}</td>
+                <td>{j.userPost.name}</td>
+                <td>{str30Format(j.content)}</td>
+                <td>{moneyFormater(j.priceExpected)}</td>
+                <td>
+                    {
+                        j.isAdminBrowsed ? (<label className="badge badge-teal">Đã duyệt</label>)
+                            : (<label className="badge badge-warning">Chờ xử lý</label>)
+                    }
+                </td>
                 <td className="text-right">
-                    <a href="#" className="btn btn-outline-danger btn-sm">
-                        Xóa
-                    </a>
+                    <Link to={`/dashboard/job/${j._id}`} className="btn btn-outline-success btn-sm">
+                        Xem chi tiết
+                    </Link>
                 </td>
             </tr>
         ));
@@ -60,27 +64,24 @@ class ListSkill extends PureComponent<Props, State> {
                         <div className="card">
                             <div className="card-body">
                                 <div className="card-list-header">
-                                    <h5 className="card-title mb-4" style={{ padding: 7 }}>Danh sách kỹ năng</h5>
-                                    <div>
-                                        <a href="/dashboard/add-skill" className="btn btn-primary">
-                                            <i className="fa fa-plus"/>
-                                            Thêm kỹ năng
-                                        </a>
-                                    </div>
+                                    <h5 className="card-title mb-4" style={{ padding: 7 }}>Danh sách công việc</h5>
                                 </div>
                                 <div className="table-responsive">
                                     <table className="table center-aligned-table table-striped">
                                         <thead>
                                         <tr>
-                                            <th className="border-bottom-0">STT</th>
-                                            <th className="border-bottom-0">Kỹ năng</th>
-                                            <th className="border-bottom-0">Lần cập nhật cuối</th>
+                                            <th className="border-bottom-0">No.</th>
+                                            <th className="border-bottom-0">Tên</th>
+                                            <th className="border-bottom-0">Người đăng</th>
+                                            <th className="border-bottom-0">Mô tả</th>
+                                            <th className="border-bottom-0">Mức giá</th>
+                                            <th className="border-bottom-0">Tình trạng</th>
                                             <th className="border-bottom-0 text-right">Hành động</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         {
-                                            skillsJSX
+                                            jobsJSX
                                         }
                                         </tbody>
                                     </table>
@@ -107,4 +108,4 @@ class ListSkill extends PureComponent<Props, State> {
     }
 }
 
-export default ListSkill;
+export default ListJob;

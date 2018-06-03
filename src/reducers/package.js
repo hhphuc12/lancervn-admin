@@ -1,20 +1,25 @@
 // @flow weak
 import {
-    REQUEST_LIST_USER,
-    RECEIVED_LIST_USER,
-    ERROR_LIST_USER,
-    REQUEST_CHANGE_BLOCK_STATE_USER,
-    RECEIVED_CHANGE_BLOCK_STATE_USER,
-    ERROR_CHANGE_BLOCK_STATE_USER,
-    RESET_DATA_CHANGE_STATE,
-} from "../constants/userType";
+    REQUEST_LIST_PACKAGE,
+    RECEIVED_LIST_PACKAGE,
+    ERROR_LIST_PACKAGE,
+    REQUEST_BROWSE_PACKAGE,
+    RECEIVED_BROWSE_PACKAGE,
+    ERROR_BROWSE_PACKAGE,
+    REQUEST_PACKAGE_DETAIL,
+    RECEIVED_PACKAGE_DETAIL,
+    ERROR_PACKAGE_DETAIL,
+} from "../constants/packageType";
 import moment from "moment/moment";
 
 const initialState = {
-    users: [],
-    user: {},
+    packages: [],
+    packageDetail: {},
+    isBrowseSuccess: false,
     isFetching: false,
-    isDataChange: false,
+    isError: false,
+    errorMessage: '',
+    pages: 1,
 };
 
 const currentTime = moment().format();
@@ -24,57 +29,72 @@ export default function (
     action
 ) {
     switch (action.type) {
-        case REQUEST_LIST_USER:
+        case REQUEST_LIST_PACKAGE:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
             };
 
-        case RECEIVED_LIST_USER:
+        case RECEIVED_LIST_PACKAGE:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                users: action && action.users ? action && action.users : initialState.users,
+                packages: action && action.packages ? action && action.packages : initialState.packages,
+                pages: action && action.pages ? action && action.pages : initialState.pages,
             };
 
-        case ERROR_LIST_USER:
+        case ERROR_LIST_PACKAGE:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
             };
 
-        case REQUEST_CHANGE_BLOCK_STATE_USER:
+        case REQUEST_PACKAGE_DETAIL:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
             };
 
-        case RECEIVED_CHANGE_BLOCK_STATE_USER:
+        case RECEIVED_PACKAGE_DETAIL:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                isDataChange: true,
+                packageDetail: action && action.packageDetail ? action && action.packageDetail : initialState.packageDetail,
             };
 
-        case ERROR_CHANGE_BLOCK_STATE_USER:
+        case ERROR_PACKAGE_DETAIL:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                isDataChange: false,
             };
 
-        case RESET_DATA_CHANGE_STATE:
+        case REQUEST_BROWSE_PACKAGE:
+            return {
+                ...state,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
+            };
+
+        case RECEIVED_BROWSE_PACKAGE:
+            return {
+                ...state,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
+                isBrowseSuccess: true,
+            };
+
+        case ERROR_BROWSE_PACKAGE:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                isDataChange: false,
+                isBrowseSuccess: false,
             };
 
         default:

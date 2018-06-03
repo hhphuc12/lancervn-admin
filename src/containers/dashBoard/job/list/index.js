@@ -3,18 +3,16 @@
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 import * as viewsActions      from '../../../../actions/viewAction';
-import * as userAuthActions   from '../../../../actions/userAuthAction';
-import * as userActions      from '../../../../actions/userActions';
-import ListUser              from './ListUser';
+import * as jobActions        from '../../../../actions/jobActions';
+import ListJob                from './ListJob';
 import * as errorActions      from "../../../../actions/errorActions";
 
 const mapStateToProps = (state) => {
     return {
         currentView:  state.views.currentView,
 
-        isFetching:     state.user.isFetching,
-        users:          state.user.users,
-        isDataChange:   state.user.isDataChange,
+        jobs: state.job.jobs,
+        pages: state.job.pages,
     };
 };
 
@@ -23,8 +21,7 @@ const mapDispatchToProps = (dispatch) => {
         actions : bindActionCreators(
             {
                 ...viewsActions,
-                ...userAuthActions,
-                ...userActions,
+                ...jobActions,
                 ...errorActions,
             },
             dispatch
@@ -35,4 +32,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ListUser);
+)(ListJob);

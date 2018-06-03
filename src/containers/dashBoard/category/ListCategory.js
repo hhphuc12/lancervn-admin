@@ -3,6 +3,7 @@
 import React, {PureComponent} from 'react';
 import { dateFormatter, truncateText } from "../../../helpers";
 import { Link } from 'react-router-dom';
+import { MaterialProgress } from "../../../components";
 
 class ListAdmin extends PureComponent<Props, State> {
     componentDidMount() {
@@ -22,6 +23,13 @@ class ListAdmin extends PureComponent<Props, State> {
 
     render() {
         const { categories } = this.props;
+        if (categories.length === 0)
+            return (
+                <div className="content-wrapper loading-wrapper">
+                    <MaterialProgress/>
+                </div>
+            );
+
         const categoriesJSX = categories.map((cate, index) => (
             <tr key={index}>
                 <td className="table-cell-content">{index + 1}</td>

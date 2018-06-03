@@ -10,7 +10,7 @@ if (process.env.REACT_APP_ENV === 'staging') {
 const socket = openSocket('https://stg-tokubuy.bap.jp');
 
 export const sendMessage = message => {
-    const accessToken = localStorage.getItem('x-access-token');
+    const accessToken = localStorage.getItem('admin-access-token');
     const url = `${BASE_URL_TOKUBUY}send-message`;
     return request.post(url, { message: message, type: 1 }, accessToken);
 };

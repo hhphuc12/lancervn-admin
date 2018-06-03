@@ -19,6 +19,7 @@ const mapStateToProps = (state) => {
         isFetching:      state.skill.isFetching,
 
         skills:          state.skill.skills,
+        pages:           state.skill.pages,
     };
 };
 

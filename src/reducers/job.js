@@ -1,20 +1,25 @@
 // @flow weak
 import {
-    REQUEST_LIST_USER,
-    RECEIVED_LIST_USER,
-    ERROR_LIST_USER,
-    REQUEST_CHANGE_BLOCK_STATE_USER,
-    RECEIVED_CHANGE_BLOCK_STATE_USER,
-    ERROR_CHANGE_BLOCK_STATE_USER,
-    RESET_DATA_CHANGE_STATE,
-} from "../constants/userType";
+    REQUEST_LIST_JOB,
+    RECEIVED_LIST_JOB,
+    ERROR_LIST_JOB,
+    REQUEST_BROWSE_JOB,
+    RECEIVED_BROWSE_JOB,
+    ERROR_BROWSE_JOB,
+    REQUEST_JOB_DETAIL,
+    RECEIVED_JOB_DETAIL,
+    ERROR_JOB_DETAIL,
+} from "../constants/jobType";
 import moment from "moment/moment";
 
 const initialState = {
-    users: [],
-    user: {},
+    jobs: [],
+    jobDetail: {},
+    isBrowseSuccess: false,
     isFetching: false,
-    isDataChange: false,
+    isError: false,
+    errorMessage: '',
+    pages: 1,
 };
 
 const currentTime = moment().format();
@@ -24,57 +29,72 @@ export default function (
     action
 ) {
     switch (action.type) {
-        case REQUEST_LIST_USER:
+        case REQUEST_LIST_JOB:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
             };
 
-        case RECEIVED_LIST_USER:
+        case RECEIVED_LIST_JOB:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                users: action && action.users ? action && action.users : initialState.users,
+                jobs: action && action.jobs ? action && action.jobs : initialState.jobs,
+                pages: action && action.pages ? action && action.pages : initialState.pages,
             };
 
-        case ERROR_LIST_USER:
+        case ERROR_LIST_JOB:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
             };
 
-        case REQUEST_CHANGE_BLOCK_STATE_USER:
+        case REQUEST_JOB_DETAIL:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
             };
 
-        case RECEIVED_CHANGE_BLOCK_STATE_USER:
+        case RECEIVED_JOB_DETAIL:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                isDataChange: true,
+                jobDetail: action && action.jobDetail ? action && action.jobDetail : initialState.jobDetail,
             };
 
-        case ERROR_CHANGE_BLOCK_STATE_USER:
+        case ERROR_JOB_DETAIL:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                isDataChange: false,
             };
 
-        case RESET_DATA_CHANGE_STATE:
+        case REQUEST_BROWSE_JOB:
+            return {
+                ...state,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching
+            };
+
+        case RECEIVED_BROWSE_JOB:
+            return {
+                ...state,
+                actionTime: action && action.time ?  action && action.time : currentTime,
+                isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
+                isBrowseSuccess: true,
+            };
+
+        case ERROR_BROWSE_JOB:
             return {
                 ...state,
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching:  action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
-                isDataChange: false,
+                isBrowseSuccess: false,
             };
 
         default:

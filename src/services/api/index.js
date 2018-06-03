@@ -2,7 +2,9 @@
 import { listAdmin, postAdmin } from "./admin";
 import { listCategory, postAddCategory, detailCategory } from "./category";
 import { listSkill, postSkill } from "./skill";
-import { listUser, getDetailUser } from "./user";
+import { listUser, postChangeBlockStateUser } from "./user";
+import { listJob, jobDetail, postBrowseJob } from './job';
+import { listPackage, packageDetail, postBrowsePackage } from './package';
 
 import request                         from '../promisedHttpRequest';
 
@@ -22,5 +24,11 @@ export {
     listSkill,
     postSkill,
     listUser,
-    getDetailUser,
+    postChangeBlockStateUser,
+    listJob,
+    jobDetail,
+    postBrowseJob,
+    listPackage,
+    packageDetail,
+    postBrowsePackage,
 };

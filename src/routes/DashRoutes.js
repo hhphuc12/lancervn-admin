@@ -14,6 +14,10 @@ import DetailCategory           from '../containers/dashBoard/category/categoryD
 import ListSkill                from '../containers/dashBoard/skill/listSkill';
 import AddSkill                 from '../containers/dashBoard/skill/addSkill';
 import ListUser                 from '../containers/dashBoard/user/listUser';
+import ListJob                  from '../containers/dashBoard/job/list';
+import JobDetail                from '../containers/dashBoard/job/detail';
+import ListPackage              from '../containers/dashBoard/package/list';
+import PackageDetail            from '../containers/dashBoard/package/detail';
 import PageNotFound             from '../containers/pageNotFound';
 
 const DashRoutes = () => (
@@ -27,6 +31,10 @@ const DashRoutes = () => (
         <Route path='/dashboard/skills' component={ListSkill} />
         <Route path='/dashboard/add-skill' component={AddSkill} />
         <Route path='/dashboard/users' component={ListUser} />
+        <Route path='/dashboard/jobs' component={ListJob} />
+        <Route path='/dashboard/job/:id' component={JobDetail} />
+        <Route path='/dashboard/packages' component={ListPackage} />
+        <Route path='/dashboard/package/:id' component={PackageDetail} />
         <Route component={PageNotFound} />
     </Switch>
 );

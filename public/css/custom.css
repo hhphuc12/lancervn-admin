@@ -120,3 +120,45 @@ input[type="file"] {
 .profile-dropdown-item {
   border-bottom: none !important;
 }
+
+.profile-box {
+  text-align: center;
+}
+
+.avatar-profile {
+  border-radius: 50% !important;
+  width: 12rem;
+  height: 12rem;
+}
+
+.profile-name {
+  margin-top: 2rem;
+}
+
+.m-active a span {
+  color: #1991EB !important;
+}
+
+.m-unactive a span {
+  color: #4A4949 !important;
+}
+
+.step { position: relative; min-height: 32px /* circle-size */ ; }
+.step > div:first-child { position: static; height: 0; }
+.step > div:last-child { margin-left: 32px ; padding-left: 16px; }
+.circle { background: #4285f4; width: 32px; height: 32px; line-height: 32px; border-radius: 16px; position: relative; color: white; text-align: center; }
+.line { position: absolute; border-left: 1px solid gainsboro; left: 16px; bottom: 10px; top: 42px; }
+.step:last-child .line { display: none; }
+.step-content { line-height: 32px; }
+
+.step-item .body {
+  height: 3rem;
+}
+
+.step-item .title {
+  font-size: 1rem;
+}
+
+.loading-wrapper {
+  text-align: center;
+}

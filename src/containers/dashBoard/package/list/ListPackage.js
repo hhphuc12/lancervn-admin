@@ -1,54 +1,58 @@
 // @flow strong
 
 import React, {PureComponent} from 'react';
-import { dateFormatter } from "../../../../helpers";
+import { moneyFormater, str30Format } from "../../../../helpers/index";
+import { Link } from 'react-router-dom';
 import { MaterialProgress } from "../../../../components";
 import ReactPaginate from 'react-paginate';
 
-class ListSkill extends PureComponent<Props, State> {
+class ListPackage extends PureComponent<Props, State> {
     componentDidMount() {
         const {
             actions: {
-                getSkillsIfNeed,
-                enterListSkill,
+                getListPackageIfNeed,
+                enterListPackage,
             }
         } = this.props;
-        enterListSkill();
-        getSkillsIfNeed();
+        enterListPackage();
+        getListPackageIfNeed(1);
     }
 
     componentWillUnmount() {
-        this.props.actions.leaveListSkill();
+        this.props.actions.leaveListPackage();
     }
 
     handlePageClick = data => {
         const page = data.selected + 1;
-        this.props.actions.getSkillsIfNeed(page);
-    };
-
-    state = {
-        data: [],
-        offset: 0
+        this.props.actions.getListPackageIfNeed(page);
     };
 
     render() {
-        const { skills, pages } = this.props;
-        if (skills.length === 0)
+        const { packages, pages } = this.props;
+        if (packages.length === 0)
             return (
                 <div className="content-wrapper loading-wrapper">
                     <MaterialProgress/>
                 </div>
             );
 
-        const skillsJSX = skills.map((skill, index) => (
+        const packagesJSX = packages.map((p, index) => (
             <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{skill.name}</td>
-                <td>{dateFormatter(skill.updatedAt)}</td>
+                <td>{str30Format(p.name)}</td>
+                <td>{p.userPost.name}</td>
+                <td>{str30Format(p.expectedResult)}</td>
+                <td>{moneyFormater(p.priceExpected)}</td>
+                <td>
+                    {
+                        p.isAdminBrowsed ? (<label className="badge badge-teal">Đã duyệt</label>)
+                            : (<label className="badge badge-warning">Chờ xử lý</label>)
+                    }
+                </td>
                 <td className="text-right">
-                    <a href="#" className="btn btn-outline-danger btn-sm">
-                        Xóa
-                    </a>
+                    <Link to={`/dashboard/package/${p._id}`} className="btn btn-outline-success btn-sm">
+                        Xem chi tiết
+                    </Link>
                 </td>
             </tr>
         ));
@@ -60,27 +64,24 @@ class ListSkill extends PureComponent<Props, State> {
                         <div className="card">
                             <div className="card-body">
                                 <div className="card-list-header">
-                                    <h5 className="card-title mb-4" style={{ padding: 7 }}>Danh sách kỹ năng</h5>
-                                    <div>
-                                        <a href="/dashboard/add-skill" className="btn btn-primary">
-                                            <i className="fa fa-plus"/>
-                                            Thêm kỹ năng
-                                        </a>
-                                    </div>
+                                    <h5 className="card-title mb-4" style={{ padding: 7 }}>Danh sách gói công việc</h5>
                                 </div>
                                 <div className="table-responsive">
                                     <table className="table center-aligned-table table-striped">
                                         <thead>
                                         <tr>
-                                            <th className="border-bottom-0">STT</th>
-                                            <th className="border-bottom-0">Kỹ năng</th>
-                                            <th className="border-bottom-0">Lần cập nhật cuối</th>
+                                            <th className="border-bottom-0">No.</th>
+                                            <th className="border-bottom-0">Tên</th>
+                                            <th className="border-bottom-0">Người đăng</th>
+                                            <th className="border-bottom-0">Kết quả</th>
+                                            <th className="border-bottom-0">Mức giá</th>
+                                            <th className="border-bottom-0">Tình trạng</th>
                                             <th className="border-bottom-0 text-right">Hành động</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         {
-                                            skillsJSX
+                                            packagesJSX
                                         }
                                         </tbody>
                                     </table>
@@ -107,4 +108,4 @@ class ListSkill extends PureComponent<Props, State> {
     }
 }
 
-export default ListSkill;
+export default ListPackage;

@@ -8,6 +8,8 @@ import admin                             from './admin';
 import category                          from './category';
 import skill                             from './skill';
 import user                              from './user';
+import job                               from './job';
+import _package                          from './package';
 import error                             from './error';
 
 export const reducers = {
@@ -17,6 +19,8 @@ export const reducers = {
     category,
     skill,
     user,
+    job,
+    _package,
     error,
 };
 
