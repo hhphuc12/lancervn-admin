@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
         currentView:  state.views.currentView,
 
         packages: state._package.packages,
+        pages: state._package.pages,
     };
 };
 

@@ -22,11 +22,12 @@ function requestListPackages(time = moment().format()) {
         time
     };
 }
-function receivedListPackages(packages, time = moment().format()) {
+function receivedListPackages(packages, pages, time = moment().format()) {
     return {
         type:       RECEIVED_LIST_PACKAGE,
         isFetching: false,
         packages,
+        pages,
         time
     };
 }
@@ -38,13 +39,13 @@ function errorListPackages(time = moment().format()) {
     };
 }
 
-export function getListPackageIfNeed(): (...any) => Promise<any> {
+export function getListPackageIfNeed(page): (...any) => Promise<any> {
     return (
         dispatch: (any) => any,
         getState: () => boolean,
     ): any => {
         if(shouldGetPackages(getState())) {
-            return dispatch(getPackages());
+            return dispatch(getPackages(page));
         }
         return Promise.resolve('already fetching packages...');
     }
@@ -60,15 +61,15 @@ function shouldGetPackages(
     return true;
 }
 
-function getPackages() {
+function getPackages(page) {
     return dispatch => {
         dispatch(requestListPackages());
         const adminToken = auth.getToken();
-        listPackage(1, adminToken)
+        listPackage(page, adminToken)
             .then(res => {
                 if (res.status !== 200)
                     return dispatch(errorBadRequest(res.status));
-                dispatch(receivedListPackages(res.data.docs));
+                dispatch(receivedListPackages(res.data.docs, res.data.pages));
             })
             .catch(error => {
                 dispatch(errorListPackages(error));

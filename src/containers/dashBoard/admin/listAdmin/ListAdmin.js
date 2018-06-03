@@ -2,6 +2,7 @@
 
 import React, {PureComponent} from 'react';
 import { dateFormatter } from "../../../../helpers";
+import { MaterialProgress } from "../../../../components";
 
 class ListAdmin extends PureComponent<Props, State> {
     componentDidMount() {
@@ -21,13 +22,20 @@ class ListAdmin extends PureComponent<Props, State> {
 
     render() {
         const { admins } = this.props;
+        if (admins.length === 0)
+            return (
+                <div className="content-wrapper loading-wrapper">
+                    <MaterialProgress/>
+                </div>
+            );
+
         const adminsJSX = admins.map((admin, index) => (
             <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{admin.username}</td>
                 <td>{dateFormatter(admin.createdAt)}</td>
                 <td>{dateFormatter(admin.updatedAt)}</td>
-                <td><label className="badge badge-teal">Active</label></td>
+                <td className="text-right"><label className="badge badge-teal">Active</label></td>
             </tr>
         ));
 
@@ -38,7 +46,7 @@ class ListAdmin extends PureComponent<Props, State> {
                         <div className="card">
                             <div className="card-body">
                                 <div className="card-list-header">
-                                    <h5 className="card-title mb-4" style={{ padding: 7 }}>Admins</h5>
+                                    <h5 className="card-title mb-4" style={{ padding: 7 }}>Danh sách quản trị viên</h5>
                                     <div>
                                         <a href="/dashboard/add-admin" className="btn btn-primary">
                                             <i className="fa fa-plus"/>
@@ -50,11 +58,11 @@ class ListAdmin extends PureComponent<Props, State> {
                                     <table className="table center-aligned-table table-striped">
                                         <thead>
                                         <tr>
-                                            <th className="border-bottom-0">No.</th>
-                                            <th className="border-bottom-0">Username</th>
-                                            <th className="border-bottom-0">Create at</th>
-                                            <th className="border-bottom-0">Updated at</th>
-                                            <th className="border-bottom-0">Status</th>
+                                            <th className="border-bottom-0">STT</th>
+                                            <th className="border-bottom-0">Tên đăng nhập</th>
+                                            <th className="border-bottom-0">Ngày tạo</th>
+                                            <th className="border-bottom-0">Lần chỉnh sửa cuối</th>
+                                            <th className="border-bottom-0 text-right">Trạng thái</th>
                                         </tr>
                                         </thead>
                                         <tbody>

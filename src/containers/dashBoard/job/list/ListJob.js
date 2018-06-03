@@ -3,6 +3,8 @@
 import React, {PureComponent} from 'react';
 import { moneyFormater, str30Format } from "../../../../helpers/index";
 import { Link } from 'react-router-dom';
+import { MaterialProgress } from "../../../../components";
+import ReactPaginate from 'react-paginate';
 
 class ListJob extends PureComponent<Props, State> {
     componentDidMount() {
@@ -13,15 +15,26 @@ class ListJob extends PureComponent<Props, State> {
             }
         } = this.props;
         enterListJob();
-        getListJobIfNeed();
+        getListJobIfNeed(1);
     }
 
     componentWillUnmount() {
         this.props.actions.leaveListJob();
     }
 
+    handlePageClick = data => {
+        const page = data.selected + 1;
+        this.props.actions.getListJobIfNeed(page);
+    };
+
     render() {
-        const { jobs } = this.props;
+        const { jobs, pages } = this.props;
+        if (jobs.length === 0)
+            return (
+                <div className="content-wrapper loading-wrapper">
+                    <MaterialProgress/>
+                </div>
+            );
 
         const jobsJSX = jobs.map((j, index) => (
             <tr key={index}>
@@ -73,6 +86,19 @@ class ListJob extends PureComponent<Props, State> {
                                         </tbody>
                                     </table>
                                 </div>
+                                <ReactPaginate
+                                    previousLabel={"<"}
+                                    nextLabel={">"}
+                                    breakLabel={<a href="">...</a>}
+                                    breakClassName={"break-me"}
+                                    pageCount={pages}
+                                    marginPagesDisplayed={1}
+                                    pageRangeDisplayed={2}
+                                    onPageChange={this.handlePageClick}
+                                    containerClassName={"pagination"}
+                                    subContainerClassName={"pages pagination"}
+                                    activeClassName={"active"}
+                                />
                             </div>
                         </div>
                     </div>

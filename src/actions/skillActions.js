@@ -18,11 +18,12 @@ function requestListSkills(time = moment().format()) {
         time
     };
 }
-function receivedListSkills(skills, time = moment().format()) {
+function receivedListSkills(skills, pages, time = moment().format()) {
     return {
         type:       RECEIVED_LIST_SKILL,
         isFetching: false,
         skills,
+        pages,
         time
     };
 }
@@ -34,13 +35,13 @@ function errorListSkills(time = moment().format()) {
     };
 }
 
-export function getSkillsIfNeed(): (...any) => Promise<any> {
+export function getSkillsIfNeed(page): (...any) => Promise<any> {
     return (
         dispatch: (any) => any,
         getState: () => boolean,
     ): any => {
         if(shouldGetSkills(getState())) {
-            return dispatch(getSkills());
+            return dispatch(getSkills(page));
         }
         return Promise.resolve('already fetching skills...');
     }
@@ -56,14 +57,14 @@ function shouldGetSkills(
     return true;
 }
 
-function getSkills() {
+function getSkills(page) {
     return dispatch => {
         dispatch(requestListSkills());
-        listSkill()
+        listSkill(page)
             .then(res => {
                 if (res.status !== 200)
                     return dispatch(errorBadRequest(res.status));
-                dispatch(receivedListSkills(res.data.docs));
+                dispatch(receivedListSkills(res.data.docs, res.data.pages));
             })
             .catch(error => {
                 dispatch(errorListSkills(error));
