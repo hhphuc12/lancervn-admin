@@ -53,10 +53,10 @@ class ListAdmin extends PureComponent<Props, State> {
                                 <div className="card-list-header">
                                     <h5 className="card-title mb-4" style={{ padding: 7 }}>Lĩnh vực</h5>
                                     <div>
-                                        <a href="/dashboard/add-category" className="btn btn-primary">
+                                        <Link to="/dashboard/add-category" className="btn btn-primary">
                                             <i className="fa fa-plus"/>
                                             Tạo lĩnh vực
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="table-responsive">

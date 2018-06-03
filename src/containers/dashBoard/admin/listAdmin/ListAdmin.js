@@ -3,6 +3,7 @@
 import React, {PureComponent} from 'react';
 import { dateFormatter } from "../../../../helpers";
 import { MaterialProgress } from "../../../../components";
+import { Link } from 'react-router-dom';
 
 class ListAdmin extends PureComponent<Props, State> {
     componentDidMount() {
@@ -48,10 +49,10 @@ class ListAdmin extends PureComponent<Props, State> {
                                 <div className="card-list-header">
                                     <h5 className="card-title mb-4" style={{ padding: 7 }}>Danh sách quản trị viên</h5>
                                     <div>
-                                        <a href="/dashboard/add-admin" className="btn btn-primary">
+                                        <Link to="/dashboard/add-admin" className="btn btn-primary">
                                             <i className="fa fa-plus"/>
                                             Thêm admin
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="table-responsive">
