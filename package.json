@@ -52,7 +52,7 @@
     "sweetalert": "^2.1.0"
   },
   "scripts": {
-    "start": "SET PORT=3006 && react-scripts start",
+    "start": "PORT=1995 react-scripts start",
     "build": "react-scripts build",
     "test": "mocha src/config/.setup.js src/**/*.test.js",
     "eject": "react-scripts eject",
