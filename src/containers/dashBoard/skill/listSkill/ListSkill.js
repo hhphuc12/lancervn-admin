@@ -21,13 +21,9 @@ class ListSkill extends PureComponent<Props, State> {
         this.props.actions.leaveListSkill();
     }
 
-    handlePageClick = (data) => {
-        let selected = data.selected;
-        let offset = Math.ceil(selected * this.props.perPage);
-
-        this.setState({offset: offset}, () => {
-            console.log('hiihi');
-        });
+    handlePageClick = data => {
+        const page = data.selected + 1;
+        this.props.actions.getSkillsIfNeed(page);
     };
 
     state = {
@@ -36,7 +32,7 @@ class ListSkill extends PureComponent<Props, State> {
     };
 
     render() {
-        const { skills } = this.props;
+        const { skills, pages } = this.props;
         if (skills.length === 0)
             return (
                 <div className="content-wrapper loading-wrapper">
@@ -48,7 +44,6 @@ class ListSkill extends PureComponent<Props, State> {
             <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{skill.name}</td>
-                <td>{skill.description}</td>
                 <td>{dateFormatter(skill.updatedAt)}</td>
                 <td className="text-right">
                     <a href="#" className="btn btn-outline-danger btn-sm">
@@ -65,7 +60,7 @@ class ListSkill extends PureComponent<Props, State> {
                         <div className="card">
                             <div className="card-body">
                                 <div className="card-list-header">
-                                    <h5 className="card-title mb-4" style={{ padding: 7 }}>Skills</h5>
+                                    <h5 className="card-title mb-4" style={{ padding: 7 }}>Danh sách kỹ năng</h5>
                                     <div>
                                         <a href="/dashboard/add-skill" className="btn btn-primary">
                                             <i className="fa fa-plus"/>
@@ -77,11 +72,10 @@ class ListSkill extends PureComponent<Props, State> {
                                     <table className="table center-aligned-table table-striped">
                                         <thead>
                                         <tr>
-                                            <th className="border-bottom-0">No.</th>
-                                            <th className="border-bottom-0">Username</th>
-                                            <th className="border-bottom-0">Create at</th>
-                                            <th className="border-bottom-0">Updated at</th>
-                                            <th className="border-bottom-0 text-right">Actions</th>
+                                            <th className="border-bottom-0">STT</th>
+                                            <th className="border-bottom-0">Kỹ năng</th>
+                                            <th className="border-bottom-0">Lần cập nhật cuối</th>
+                                            <th className="border-bottom-0 text-right">Hành động</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -90,20 +84,20 @@ class ListSkill extends PureComponent<Props, State> {
                                         }
                                         </tbody>
                                     </table>
-                                    <ReactPaginate
-                                        previousLabel={"previous"}
-                                        nextLabel={"next"}
-                                        breakLabel={<a href="">...</a>}
-                                        breakClassName={"break-me"}
-                                        pageCount={this.state.pageCount}
-                                        marginPagesDisplayed={2}
-                                        pageRangeDisplayed={5}
-                                        onPageChange={this.handlePageClick}
-                                        containerClassName={"pagination"}
-                                        subContainerClassName={"pages pagination"}
-                                        activeClassName={"active"}
-                                    />
                                 </div>
+                                <ReactPaginate
+                                    previousLabel={"<"}
+                                    nextLabel={">"}
+                                    breakLabel={<a href="">...</a>}
+                                    breakClassName={"break-me"}
+                                    pageCount={pages}
+                                    marginPagesDisplayed={1}
+                                    pageRangeDisplayed={2}
+                                    onPageChange={this.handlePageClick}
+                                    containerClassName={"pagination"}
+                                    subContainerClassName={"pages pagination"}
+                                    activeClassName={"active"}
+                                />
                             </div>
                         </div>
                     </div>

@@ -11,6 +11,7 @@ import moment from "moment/moment";
 
 const initialState = {
     skills: [],
+    pages: 1,
     isFetching: false,
     isSkillAdded: false,
     isError: false,
@@ -37,6 +38,7 @@ export default function (
                 actionTime: action && action.time ?  action && action.time : currentTime,
                 isFetching: action && action.isFetching ?  action && action.isFetching : initialState.isFetching,
                 skills: action && action.skills ? action && action.skills : initialState.skills,
+                pages: action && action.pages ? action && action.pages : initialState.pages,
             };
 
         case ERROR_LIST_SKILL:

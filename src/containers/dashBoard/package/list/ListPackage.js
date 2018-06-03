@@ -4,6 +4,7 @@ import React, {PureComponent} from 'react';
 import { moneyFormater, str30Format } from "../../../../helpers/index";
 import { Link } from 'react-router-dom';
 import { MaterialProgress } from "../../../../components";
+import ReactPaginate from 'react-paginate';
 
 class ListPackage extends PureComponent<Props, State> {
     componentDidMount() {
@@ -14,15 +15,20 @@ class ListPackage extends PureComponent<Props, State> {
             }
         } = this.props;
         enterListPackage();
-        getListPackageIfNeed();
+        getListPackageIfNeed(1);
     }
 
     componentWillUnmount() {
         this.props.actions.leaveListPackage();
     }
 
+    handlePageClick = data => {
+        const page = data.selected + 1;
+        this.props.actions.getListPackageIfNeed(page);
+    };
+
     render() {
-        const { packages } = this.props;
+        const { packages, pages } = this.props;
         if (packages.length === 0)
             return (
                 <div className="content-wrapper loading-wrapper">
@@ -80,6 +86,19 @@ class ListPackage extends PureComponent<Props, State> {
                                         </tbody>
                                     </table>
                                 </div>
+                                <ReactPaginate
+                                    previousLabel={"<"}
+                                    nextLabel={">"}
+                                    breakLabel={<a href="">...</a>}
+                                    breakClassName={"break-me"}
+                                    pageCount={pages}
+                                    marginPagesDisplayed={1}
+                                    pageRangeDisplayed={2}
+                                    onPageChange={this.handlePageClick}
+                                    containerClassName={"pagination"}
+                                    subContainerClassName={"pages pagination"}
+                                    activeClassName={"active"}
+                                />
                             </div>
                         </div>
                     </div>

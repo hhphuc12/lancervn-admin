@@ -22,11 +22,12 @@ function requestListJobs(time = moment().format()) {
         time
     };
 }
-function receivedListJobs(jobs, time = moment().format()) {
+function receivedListJobs(jobs, pages, time = moment().format()) {
     return {
         type:       RECEIVED_LIST_JOB,
         isFetching: false,
         jobs,
+        pages,
         time
     };
 }
@@ -38,13 +39,13 @@ function errorListJobs(time = moment().format()) {
     };
 }
 
-export function getListJobIfNeed(): (...any) => Promise<any> {
+export function getListJobIfNeed(page): (...any) => Promise<any> {
     return (
         dispatch: (any) => any,
         getState: () => boolean,
     ): any => {
         if(shouldGetJobs(getState())) {
-            return dispatch(getJobs());
+            return dispatch(getJobs(page));
         }
         return Promise.resolve('already fetching jobs...');
     }
@@ -60,15 +61,15 @@ function shouldGetJobs(
     return true;
 }
 
-function getJobs() {
+function getJobs(page) {
     return dispatch => {
         dispatch(requestListJobs());
         const adminToken = auth.getToken();
-        listJob(1, adminToken)
+        listJob(page, adminToken)
             .then(res => {
                 if (res.status !== 200)
                     return dispatch(errorBadRequest(res.status));
-                dispatch(receivedListJobs(res.data.docs));
+                dispatch(receivedListJobs(res.data.docs, res.data.pages));
             })
             .catch(error => {
                 dispatch(errorListJobs(error));
