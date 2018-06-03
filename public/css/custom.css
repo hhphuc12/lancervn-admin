@@ -162,3 +162,7 @@ input[type="file"] {
 .loading-wrapper {
   text-align: center;
 }
+
+.form-control {
+  font-size: 0.9rem !important;
+}
