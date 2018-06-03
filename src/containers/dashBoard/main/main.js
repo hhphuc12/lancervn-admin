@@ -44,9 +44,9 @@ class Main extends Component {
             <div className="container-scroller">
                 <nav className="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row" style={{ border: 0, borderRadius: 0 }}>
                     <div className="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-                        <a className="navbar-brand brand-logo" href="index.html">
+                        <Link className="navbar-brand brand-logo" to="/dashboard">
                             <img src="/images/logo.png" alt="logo" style={{ marginTop: 10 }} />
-                        </a>
+                        </Link>
                     </div>
                     <div className="navbar-menu-wrapper d-flex align-items-center">
                         <ul className="navbar-nav navbar-nav-right">
